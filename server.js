@@ -118,7 +118,7 @@ var SampleApp = function() {
 				"Content-Type": "text/html; charset=utf-8",	// 文件格式； 字符编码
 				"Title": "服务器IP信息"
 			});
-			res.write("<html><body>" + config + "</body></html>");
+			res.write("<html><body>" + config + "</body></html>", "utf-8");
 			res.end();
 		};
 
@@ -126,8 +126,21 @@ var SampleApp = function() {
 		self.routes["/getStaticFile"] = function(request, response) {
 			// 解析参数
 			self.parseParam (request, response, function (request, response, param) {
-				// 返回静态文件
-				self.loadStaticFile (param.path, response);
+				if (param.path) {
+					// 返回静态文件
+					self.loadStaticFile (param.path, response);
+				} else {
+					// 显示所有参数
+					response.writeHeader (404, {"Content-Type":"text/plain;charset=utf-8"});
+					for (var s in param) {
+						response.write (s, "utf-8");
+						response.write (" : ", "utf-8");
+						response.write (param[s], "utf-8");
+						response.write ("\n", "utf-8");
+					}
+					response.write ("404 缺少 path 参数\n", "utf-8");
+					response.end();
+				}
 			});
 		};
 
@@ -168,29 +181,35 @@ var SampleApp = function() {
 
 	// 返回静态文件
 	self.loadStaticFile = function (uri, response) {
-		var filename = path.join(process.cwd(), uri);
-		path.exists (filename, function (exists) {
-			if (!exists) {
-				response.writeHeader (404, {"Content-Type":"text/plain;charset=utf-8"});
-				response.write ("404 页面不存在\n", "utf-8");
-				response.end();
-			} else {
-				fs.readFile (filename, "binary", function (err, file) {
-					if (err) {
-						response.writeHeader (500, {"Content-Type":"text/plain;charset=utf-8"});
-						response.write((err + "\n"), "utf-8");
-						response.end();
-					} else {
-						response.writeHeader (200, {
-							"Access-Control-Allow-Origin": "*",		// HTML5 允许跨域访问的范围，* 代表允许任何网域访问
-							"Content-Type":"text/html; charset=utf-8"	// 文件格式； 字符编码
-						});
-						response.write(file, "binary");
-						response.end();
-					}
-				});
-			}
-		});
+		if (uri) {
+			var filename = path.join(process.cwd(), uri);
+			path.exists (filename, function (exists) {
+				if (!exists) {
+					response.writeHeader (404, {"Content-Type":"text/plain;charset=utf-8"});
+					response.write ("404 页面不存在\n", "utf-8");
+					response.end();
+				} else {
+					fs.readFile (filename, "binary", function (err, file) {
+						if (err) {
+							response.writeHeader (500, {"Content-Type":"text/plain;charset=utf-8"});
+							response.write((err + "\n"), "utf-8");
+							response.end();
+						} else {
+							response.writeHeader (200, {
+								"Access-Control-Allow-Origin": "*",
+								"Content-Type":"text/html; charset=utf-8"
+							});
+							response.write(file, "binary");
+							response.end();
+						}
+					});
+				}
+			});
+		} else {
+			response.writeHeader (404, {"Content-Type":"text/plain;charset=utf-8"});
+			response.write ("404 页面不存在\n", "utf-8");
+			response.end();
+		}
 	};
 
 
