@@ -115,8 +115,7 @@ var SampleApp = function() {
 
 			res.writeHeader (200, {
 				"Access-Control-Allow-Origin": "*",		// HTML5 允许跨域访问的范围，* 代表允许任何网域访问
-				"Content-Type": "text/html; charset=utf-8",	// 文件格式； 字符编码
-				"Title": "服务器IP信息"
+				"Content-Type": "text/html; charset=utf-8"	// 文件格式； 字符编码
 			});
 			res.write("<html><body>" + config + "</body></html>", "utf-8");
 			res.end();
