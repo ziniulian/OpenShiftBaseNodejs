@@ -111,7 +111,6 @@ var SampleApp = function() {
 			config += self.ipaddress;
 			config += "<br>端口号： ";
 			config += self.port;
-			// res.send("<html><head><title>服务器IP信息</title><meta charset='utf-8'/></head><body>" + config + "</body></html>");
 
 			res.writeHeader (200, {
 				"Access-Control-Allow-Origin": "*",		// HTML5 允许跨域访问的范围，* 代表允许任何网域访问
@@ -137,7 +136,7 @@ var SampleApp = function() {
 						response.write (param[s], "utf-8");
 						response.write ("\n", "utf-8");
 					}
-					response.write ("404 缺少 path 参数\n", "utf-8");
+					response.write ("\n404 缺少 path 参数\n", "utf-8");
 					response.end();
 				}
 			});
