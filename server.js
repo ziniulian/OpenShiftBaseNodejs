@@ -55,6 +55,7 @@ var SampleApp = function() {
 
 		//  Local cache for static content.
 		self.zcache["index.html"] = fs.readFileSync("./index.html");
+		self.zcache["favicon.ico"] = fs.readFileSync("./Logo_0.png");
 	};
 
 
@@ -130,6 +131,7 @@ var SampleApp = function() {
 				} else {
 					// 显示所有参数
 					response.writeHeader (404, {"Content-Type":"text/plain;charset=utf-8"});
+					response.write (process.cwd() + "\n", "utf8");	// 显示当前进程的路径
 					for (var s in param) {
 						response.write (s, "utf-8");
 						response.write (" : ", "utf-8");
@@ -146,6 +148,12 @@ var SampleApp = function() {
 		self.routes["/"] = function(req, res) {
 			res.setHeader("Content-Type", "text/html");
 			res.send(self.cache_get("index.html") );
+		};
+
+		// 网站 LOGO
+		self.routes["/favicon.ico"] = function(req, res) {
+			res.setHeader("Content-Type", "text/html");
+			res.send(self.cache_get("favicon.ico") );
 		};
 	};
 
@@ -181,7 +189,7 @@ var SampleApp = function() {
 	self.loadStaticFile = function (uri, response) {
 		if (uri) {
 			var filename = path.join(process.cwd(), uri);
-			path.exists (filename, function (exists) {
+			fs.exists (filename, function (exists) {
 				if (!exists) {
 					response.writeHeader (404, {"Content-Type":"text/plain;charset=utf-8"});
 					response.write ("404 页面不存在\n", "utf-8");
@@ -217,7 +225,7 @@ var SampleApp = function() {
 	 */
 	self.initializeServer = function() {
 		self.createRoutes();
-		self.app = express.createServer();
+		self.app = express();
 
 		//  Add handlers for the app (from the routes).
 		for (var r in self.routes) {
