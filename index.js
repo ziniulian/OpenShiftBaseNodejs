@@ -1,19 +1,16 @@
 // LZR 模块加载
-console.log ("Hellow World!");
 require("LZR");
-console.log (LZR);
 
 // LZR 子模块加载
 LZR.load([
 	"LZR.NodeJs.BaseMainSrv"
 ]);
-console.log ("LZR 子模块加载");
 
 // 服务的实例化
 var srv = new LZR.NodeJs.BaseMainSrv ({
-	port: 8080
+	ip: process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1",
+	port: process.env.OPENSHIFT_NODEJS_PORT || 8080
 });
-console.log ("服务的实例化");
 
 // 服务启动
 srv.start({
@@ -56,4 +53,3 @@ srv.start({
 		}
 	}
 });
-console.log ("服务启动");
