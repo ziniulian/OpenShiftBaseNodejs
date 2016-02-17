@@ -1,5 +1,5 @@
 {
 	"name": "OpenShiftBaseNodejs-ziniulian",
 	"version": "1.0.0",
-	"main": "server.js"
+	"main": "index.js"
 }
