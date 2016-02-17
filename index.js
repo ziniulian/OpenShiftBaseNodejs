@@ -7,7 +7,9 @@ LZR.load([
 ]);
 
 // 服务的实例化
-var srv = new LZR.NodeJs.BaseMainSrv ();
+var srv = new LZR.NodeJs.BaseMainSrv ({
+	port: 8080
+});
 
 // 服务启动
 srv.start({
