@@ -1,0 +1,95 @@
+
+body{
+	margin: 0;
+	padding: 0;
+	background-color: #FF0;
+}
+
+/*取消a链接默认样式*/
+a{
+	text-decoration:none;
+}
+
+/*区块样式*/
+.block{
+	width: 76%;
+	color: #222;
+	padding: 3% 5% 3% 5%;
+	margin: 5% 8% 3% 8%;
+}
+.blockStyle{
+	background-color: rgba(200, 200, 200, 0.5);
+	box-shadow: 1vw 1vw 0 #FF0, 1.5vw 1.5vw 0 #333;
+
+	/*兼容写法*/
+	border-radius: 0.5em;
+	border-radius: 1vw;
+}
+
+/*字体样式*/
+.head{
+	width: 98%;
+	margin: 1%;
+	color: #000;
+	text-align: center;
+	font-family: "微软雅黑";
+	font-weight: bolder;
+	margin: 2% 0 3% 0;
+	/*text-shadow: 0.2vw 0.2vw 0 #FF0, 0.4vw 0.4vw 0 #333;*/
+
+	/*兼容写法*/
+	font-size: 3em;
+	font-size: 8vw;
+}
+.title{
+	text-align: left;
+	margin-bottom: 5%;
+	font-family: "微软雅黑";
+
+	/*兼容写法*/
+	font-size: 1.2em;
+	font-size: 4vw;
+}
+.subtitle{
+	margin: 1% 0 2% 6%;
+
+	/*兼容写法*/
+	font-size: 1.0em;
+	font-size: 3vw;
+}
+.note{
+	text-align: right;
+	font-family: "微软雅黑";
+	font-style: oblique;
+
+	/*兼容写法*/
+	font-size: 0.9em;
+	font-size: 2vw;
+}
+
+/*背景图片样式*/
+.backimg{
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-clip: padding-box;
+
+	/*保证div背景全部覆盖有图片，图片可超出div范围*/
+	background-size: cover;
+
+	/*保证图片不超出div范围*/
+	/*background-size: contain;*/
+
+	/*兼容写法*/
+	border-radius: 0.5em;
+	border-radius: 1vw;
+}
+
+/*样式微调*/
+.top0 {
+	margin-top: 0;
+	padding-top: 0;
+}
+.bot0 {
+	margin-bottom: 0;
+	padding-bottom: 0;
+}
