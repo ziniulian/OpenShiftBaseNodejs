@@ -8,7 +8,7 @@ LZR.load([
 
 // 服务的实例化
 var srv = new LZR.NodeJs.BaseMainSrv ({
-	ip: process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1",
+	ip: process.env.OPENSHIFT_NODEJS_IP || "192.168.1.236",
 	port: process.env.OPENSHIFT_NODEJS_PORT || 8080
 });
 
@@ -23,15 +23,6 @@ srv.start({
 		}
 	},
 
-	// LOGO图片
-	logo: {
-		srv: "wfs",
-		obj: {
-			name: "/favicon.ico",
-			path: "/Logo.png"
-		}
-	},
-
 	// LZR库文件访问服务
 	myLib: {
 		srv: "wfs",
@@ -40,6 +31,15 @@ srv.start({
 			path: "/",
 			ajaxAllow: "*",
 			dir: LZR.curPath
+		}
+	},
+
+	// LOGO图片
+	logo: {
+		srv: "wfs",
+		obj: {
+			name: "/favicon.ico",
+			path: "/Logo.png"
 		}
 	},
 
