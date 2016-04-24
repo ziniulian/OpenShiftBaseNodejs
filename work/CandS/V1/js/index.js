@@ -1959,6 +1959,8 @@ function init () {
 	// 加载LZR库
 	LZR.HTML5.jsPath = "https://ziniulian.github.io/LX_JS/js/old/";
 	LZR.HTML5.loadJs([
+		LZR.HTML5.jsPath + "HTML5/expand/jquery/jquery.min.js",
+		LZR.HTML5.jsPath + "HTML5/expand/jquery/jquery.nicescroll.js",
 		LZR.HTML5.jsPath + "HTML5/expand/ol3/ol.js",
 		LZR.HTML5.jsPath + "HTML5/expand/echarts/all.js",
 		LZR.HTML5.jsPath + "HTML5/util/Ajax.js",

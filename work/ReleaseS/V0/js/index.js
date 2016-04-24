@@ -30,6 +30,7 @@ function init() {
 	var hwo = hw.obj;
 
 	// 配置信息
+	hwo.dataIp = "http://192.168.1.235/hbServer/api/CityPublishInfo/GetProvinceAndCityPublishData?publishDate=";
 	hw.Efl.emnull.imgUrl = "https://ziniulian.github.io/LX_JS/img/web/ReleaseS/a_Level0";
 	hw.Efl.v1.imgUrl = "https://ziniulian.github.io/LX_JS/img/web/ReleaseS/a_Level1";
 	hw.Efl.v2.imgUrl = "https://ziniulian.github.io/LX_JS/img/web/ReleaseS/a_Level2";
@@ -58,7 +59,6 @@ function init() {
 	hw.Eal.v1.css = "alarm1";
 	hw.Eal.v2.css = "alarm2";
 	hw.Eal.v3.css = "alarm3";
-	hwo.dataIp = "http://192.168.1.235/hbServer/api/CityPublishInfo/GetProvinceAndCityPublishData?publishDate=";
 
 	// OpenLayers 的 地图
 	hwo.zoomBase = 11;
@@ -155,8 +155,7 @@ function init() {
 	hwo.curTim = hwo.tim.getById("curTim");
 	hwo.curTim.dat = {};
 	hwo.baseTim = hwo.tim.getById("baseTim");
-	hwo.baseTim.dat = { tim: hw.utTim.stringToDate ("2016-3-24 10:00:00") };
-	// hwo.baseTim.dat = { tim: hw.utTim.normalize (null, 10) };	// 当前时间
+	hwo.baseTim.dat = { tim: hw.utTim.normalize (null, 10) };	// 当前时间
 	hwo.baseTim.doe.innerHTML = hw.utTim.format (hwo.baseTim.dat.tim, "hourChn") + "发布";
 	hwo.timScd = new hw.Scd ();
 	hwo.timScd.css = "main_middle_top_M";
@@ -224,6 +223,111 @@ function init() {
 	});
 	hwo.map.addOverlay(hwo.titl.view);
 
+/*
+	// 城市数据（网络版）
+	hwo.cityOrder = {
+		"city_130100": "石家庄市",
+		"city_130800": "承德市",
+		"city_130700": "张家口市",
+		"city_130300": "秦皇岛市",
+		"city_130200": "唐山市",
+		"city_131000": "廊坊市",
+		"city_130600": "保定市",
+		"city_130900": "沧州市",
+		"city_131100": "衡水市",
+		"city_130500": "邢台市",
+		"city_130400": "邯郸市",
+		"city_132000": "定州市",
+		"city_132100": "辛集市"
+	};
+	hwo.getData = function (hwo) {
+		var i, c;
+		var req = hwo.dataIp + hwo.root.utTim.format(hwo.baseTim.dat.tim);
+		var d = hwo.root.ajx.get(req);
+		var o = hwo.root.utJson.toObj(d);
+		var a = o.cityPublishDatas;
+		var r = {
+			root: this,
+			id: "prvn_" + o.ProvicePublishData.CityCode,
+			name: o.ProvicePublishData.CityName,
+			level: "prvn",
+			broadcast: o.ProvicePublishData.ForecastInfo,
+			chd_: this.cityOrder
+		};
+
+		// 处理 imgUrl 属性
+		var hdImgUrl = function (data) {
+			return "images/city_" + data.CityCode + ".png";
+		};
+
+		// 处理 broadcast 属性
+		var hdBroadcast = function (fom, alm) {
+			var s = "";
+			if (fom !== "无") {
+				s += fom;
+			}
+			if (alm !== "无") {
+				s += alm;
+			}
+			return s;
+		};
+
+		// 处理 aqi 属性
+		var hdAqi = function (data, clsLev, alm) {
+			var aqi = {};
+
+			// 最小值
+			if (data.MinAQI !== "-999") {
+				aqi.hd_min = parseInt(data.MinAQI, 10);
+			}
+
+			// 最大值
+			if (data.MaxAQI !== "-999") {
+				aqi.hd_max = parseInt(data.MaxAQI, 10);
+			}
+
+			// 首要污染物
+			if (data.Pollutant !== "无") {
+				aqi.mainFom = data.Pollutant.split(",");
+			}
+
+			// 污染级别
+			aqi.memo = {};
+			if (data.Level !== "无") {
+				aqi.memo.fomLevelName = data.Level;
+			} else {
+				aqi.memo.fomLevelName = "";
+			}
+
+			// 预警信息（暂无）
+			if (alm !== "无") {
+				aqi.alarmLevel = "v" + alm;
+			}
+
+			return aqi;
+		};
+
+		for (i = 0; i<a.length; i++) {
+			c = {
+				id: "city_" + a[i].CityCode,
+				name: a[i].CityName,
+				geoJson: [parseFloat(a[i].loncen), parseFloat(a[i].latcen)],
+				broadcast: hdBroadcast(a[i].ForecastInfo, a[i].WarningInfo),
+				imgUrl: hdImgUrl(a[i]),
+				level: "city",
+				hd_aqis: {
+					"24": hdAqi (a[i].Date1, this.root.Efl, a[i].WarningLevel),
+					"48": hdAqi (a[i].Date2, this.root.Efl, a[i].WarningLevel),
+					"72": hdAqi (a[i].Date3, this.root.Efl, a[i].WarningLevel),
+				}
+			};
+			r.chd_[c.id] = c;
+		}
+// console.log (o);
+		return r;
+	};
+	hwo.list = new hw.Dm( hwo.getData(hwo) );
+*/
 
 	// 城市数据（单机版）
 	v = {
