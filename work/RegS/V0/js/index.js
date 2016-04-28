@@ -971,7 +971,6 @@ function init () {
 	LZR.HTML5.jsPath = "https://ziniulian.github.io/LX_JS/js/old/";
 	// LZR.HTML5.jsPath = "/GitLib/LX_JS/js/old/";
 	LZR.HTML5.loadJs([
-		LZR.HTML5.jsPath + "HTML5/util/Ajax.js",
 		LZR.HTML5.jsPath + "HTML5/Bp/AirqMg/RegStat.js",
 		LZR.HTML5.jsPath + "HTML5/util/Selector.js",
 		LZR.HTML5.jsPath + "HTML5/Canvas/PenLayer.js"

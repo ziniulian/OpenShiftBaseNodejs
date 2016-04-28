@@ -940,8 +940,7 @@ function Test (hw, br) {
 				timeLong: this.md.m_time.timeCount.val * 24,	// 时间长度
 				timeStep: this.md.m_time.timeStep.val,	// 时间间隔（秒）
 				startTime: this.md.m_time.timeStart.val,
-				playSpeed: this.md.m_time.speeds.cur.value,	// 时间轴播放速度（毫秒）
-				allShow: true
+				playSpeed: this.md.m_time.speeds.cur.value	// 时间轴播放速度（毫秒）
 			});
 			this.md.m_time.ctrl.onchange = hw.bind(this, this.timeChange);
 			this.md.m_time.ctrl.init(this.md.cur.position.val);
@@ -1959,16 +1958,9 @@ function init () {
 	// 加载LZR库
 	LZR.HTML5.jsPath = "https://ziniulian.github.io/LX_JS/js/old/";
 	LZR.HTML5.loadJs([
-		LZR.HTML5.jsPath + "HTML5/expand/jquery/jquery.min.js",
-		LZR.HTML5.jsPath + "HTML5/expand/jquery/jquery.nicescroll.js",
-		LZR.HTML5.jsPath + "HTML5/expand/ol3/ol.js",
-		LZR.HTML5.jsPath + "HTML5/expand/echarts/all.js",
 		LZR.HTML5.jsPath + "HTML5/util/Ajax.js",
 		LZR.HTML5.jsPath + "HTML5/Bp/Util/BpTimeAxis.js",
 		LZR.HTML5.jsPath + "HTML5/Bp/AirqMg/RegStat2/SelectView.js"
-	]);
-	LZR.HTML5.loadCss([
-		LZR.HTML5.jsPath + "HTML5/expand/ol3/ol.css"
 	]);
 
 	// 加载数据结构
