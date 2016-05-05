@@ -321,11 +321,15 @@ html, body {
 	width: 66%;
 	height: 24px;
 	line-height: 24px;
-	outline: none;
 	text-align: center;
 	font-size: 16px;
 	font-weight: bold;
 	color: #999;
+	border: 0;
+	outline: none;
+	appearance:none;
+	-moz-appearance:none; /* Firefox */
+	-webkit-appearance:none; /* Safari 和 Chrome */
 }
 
 .RegS .right .tim {
@@ -333,8 +337,8 @@ html, body {
 }
 
 .RegS .right .mod {
-	margin: 10px 0 10px 0;
-	width: 100%;
+	margin: 10px 0 10px 10%;
+	width: 90%;
 }
 
 /*外框标题*/

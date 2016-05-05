@@ -617,7 +617,6 @@ function healthBoard (titleID, contentID, selectedCSS) {
 function init () {
 	LZR.curPath = "/myLib";
 	LZR.load([
-		// "/Lib/ol3/ol.js",
 		"LZR.HTML.Base.Ctrl.SglScd",
 		"LZR.Pro.Green.Airq.App.ReleaseSys.DatMod",
 		"LZR.Base.Time",

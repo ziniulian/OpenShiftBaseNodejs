@@ -4,6 +4,8 @@ require("LZR");
 // LZR 子模块加载
 LZR.load([
 	"LZR.NodeJs.BaseMainSrv",
+	"LZR.NodeJs.SampleProxySrv",
+	"LZR.NodeJs.ProSrv.WindSrv",
 	"LZR.NodeJs.SampleWebFileSrv"
 ]);
 
@@ -44,6 +46,18 @@ srv.start({
 		cls_: LZR.NodeJs.SampleWebFileSrv,
 		name: "/favicon.ico",
 		path: "/Logo.png"
+	},
+
+	// 简单的代理服务
+	proxy: {
+		cls_: LZR.NodeJs.SampleProxySrv,
+		name: "/srv/proxy"
+	},
+
+	// 简单的代理服务
+	wind: {
+		cls_: LZR.NodeJs.ProSrv.WindSrv,
+		name: "/srv/wind"
 	},
 
 	// 主页跳转
