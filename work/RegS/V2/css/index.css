@@ -47,14 +47,14 @@ html, body {
 
 .RegS_zm {
 	position: absolute;
-	top: 20px;
-	left: 10px;
+	top: 5px;
+	left: 5px;
 	color:#878787;
 	font-family: "微软雅黑";
 }
 
 .RegS_zm .left{
-height: 750px;
+height: 690px;
 width: 340px;
 background-color:#229ffb;
 padding-top: 10px;
@@ -244,7 +244,7 @@ padding-top: 4px;
 /*污染物*/
 .RegS_zm .Selection_d{
 padding-top: 12px;
-height: 270px;
+height: 210px;
 width: 300px;
 padding-left: 20px;
 background-color:#229ffb;
@@ -255,7 +255,7 @@ padding-right: 20px;
 
 .RegS_zm .Selection_a_r_d{
 	width:230px;
-	height:250px;
+	height:200px;
 	float:left;
 	border-radius:3px 3px 3px 3px;
 	background-color:#f9f9f9;
@@ -440,6 +440,15 @@ float:left;
 /*暂停按钮样式*/
 .RegS .LHU_BpTimeAxis_pause {
 	background-image: url(https://ziniulian.github.io/LX_JS/js/old/css/img/LHBU_BpTimeAxis_pause_blue.png);
+}
+
+/*风场图层样式*/
+.RegS .windCanvasStyle {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 }
 
 .loading {

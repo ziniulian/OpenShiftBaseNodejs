@@ -2,9 +2,9 @@
 function Test () {
 	// 配置信息
 	this.config = {
-		windUrl: "http://192.168.1.130/gisserverv0010/api/GrdHandler/getWindData",
-		// qryUrl: "https://ziniulian.github.io/LX_JS/img/"
-		qryUrl: "/GitLib/LX_JS/img/",
+		windUrl: "/srv/wind",
+		qryUrl: "https://ziniulian.github.io/LX_JS/img",
+		// qryUrl: "/GitLib/LX_JS/img",
 
 		area: {
 			"d01": {
@@ -21,8 +21,10 @@ function Test () {
 			}
 		},
 
-		backImg: "/GitLib/LX_JS/img/web/RegS/V2/back.png",
-		backJson: "/GitLib/LX_JS/img/web/RegS/V2/back.json"
+		// backImg: "/GitLib/LX_JS/img/web/RegS/V2/back.png",
+		// backJson: "/GitLib/LX_JS/img/web/RegS/V2/back.json"
+		backImg: "https://ziniulian.github.io/LX_JS/img/web/RegS/V2/back.png",
+		backJson: "https://ziniulian.github.io/LX_JS/img/web/RegS/V2/back.json"
 	};
 
 	// 创建地图
@@ -319,8 +321,8 @@ function Test () {
 			this.data.line.children[s].mapProjection = "EPSG:3857";
 		}
 		for (s in this.data.wind.children) {
-			this.data.wind.children[s].dataProjection = "EPSG:3857";
-			this.data.wind.children[s].mapProjection = "EPSG:3857";
+			this.data.wind.children[s].dataProjection = "EPSG:4326";	// 等经纬度投影
+			this.data.wind.children[s].mapProjection = "EPSG:3857";	// 墨卡托投影
 			this.data.wind.children[s].color = "#F91";
 		}
 		for (s in this.config.area) {
@@ -343,6 +345,7 @@ function Test () {
 			olmap: this.map,
 			data: this.data
 		});
+		this.rs.windFlash = false;
 		this.data.qry.ctrl.backImg = this.config.backImg;
 		this.data.qry.ctrl.backJson = this.config.backJson;
 		this.data.timeAxis.ctrl.init();
@@ -401,6 +404,9 @@ function Test () {
 		f.bdo.placeTo(this.doms.RegS_area);
 
 		// 污染物
+		delete this.data.fom.children.AQI;
+		delete this.data.fom.children.O38H;
+		this.data.fom.children.O3.day = "3D";
 		for (s in this.data.fom.children) {
 			f = this.data.fom.children[s].view;
 			f.data.cssNormal.set("li noselect");
@@ -559,22 +565,192 @@ function Test () {
 	this.run = function () {
 		this.data.wind.ctrl.cav.width = this.data.wind.ctrl.cav.clientWidth;
 		this.data.wind.ctrl.cav.height = this.data.wind.ctrl.cav.clientHeight;
-		this.data.cur.fom.visible.set(true);
-		this.data.cur.line.visible.set(false);
-		this.data.cur.wind.visible.set(true);
-		this.rs.flush();
+		setTimeout(LZR.bind(this, function () {
+			this.data.cur.fom.visible.set(true);
+			this.data.cur.line.visible.set(false);
+			this.data.cur.wind.visible.set(true);
+		}), 1);
+	};
+
+	// 功能替换
+	this.changeFun = function () {
+		LZR.HTML5.Bp.AirqMg.RegStat2.Query.prototype.qry = function () {
+			var y = this.layers[this.index];
+			if (y) {
+				if (this.foc.tim === "2015070220" && this.foc.mod === "NAQPMS") {
+					switch (y.className) {
+						case "LZR.HTML5.Bp.AirqMg.RegStat2.OlLayer":
+						case "LZR.HTML5.Bp.AirqMg.RegStat2.OlGeoJsonLayer":
+							this.foc.num = y.num.val;
+							this.handleClose (this.qry2(this.foc));
+							break;
+						case "LZR.HTML5.Bp.AirqMg.RegStat2.WindLayer":
+							this.handleClose (this.creWindSQL(y));
+							break;
+					}
+				} else {
+					this.handleClose ([]);
+				}
+			} else {
+				this.index = -1;
+			}
+		};
+
+		LZR.HTML5.Bp.AirqMg.RegStat2.Query.prototype.qry2 = function (foc) {
+			var path, nam, obj, step, i, t, pt;
+			var r = [];
+			var ex = ".png";
+			switch (foc.num) {
+				case "39":
+					path = "/fom/Day/co/";
+					nam = "CODailySpa_";
+					step = 24;
+					break;
+				case "37":
+					path = "/fom/Day/no2/";
+					nam = "NO2DailySpa_";
+					step = 24;
+					break;
+				case "3D":
+					path = "/fom/Day/o3/";
+					nam = "O3DailySpa_";
+					step = 24;
+					break;
+				case "38":
+					path = "/fom/Day/pm10/";
+					nam = "PM10DailySpa_";
+					step = 24;
+					break;
+				case "3A":
+					path = "/fom/Day/pm25/";
+					nam = "PM25DailySpa_";
+					step = 24;
+					break;
+				case "36":
+					path = "/fom/Day/so2/";
+					nam = "SO2DailySpa_";
+					step = 24;
+					break;
+				case "33":
+					path = "/fom/Hour/co/";
+					nam = "COHourlySpa_";
+					step = 1;
+					break;
+				case "31":
+					path = "/fom/Hour/no2/";
+					nam = "NO2HourlySpa_";
+					step = 1;
+					break;
+				case "34":
+					path = "/fom/Hour/o3/";
+					nam = "O3HourlySpa_";
+					step = 1;
+					break;
+				case "32":
+					path = "/fom/Hour/pm10/";
+					nam = "PM10HourlySpa_";
+					step = 1;
+					break;
+				case "35":
+					path = "/fom/Hour/pm25/";
+					nam = "PM25HourlySpa_";
+					step = 1;
+					break;
+				case "30":
+					path = "/fom/Hour/so2/";
+					nam = "SO2HourlySpa_";
+					step = 1;
+					break;
+				case "52":
+					path = "/meteor/Day/Pr/";
+					nam = "PrDailySpa_";
+					step = 24;
+					ex = ".js";
+					break;
+				case "51":
+					path = "/meteor/Day/Rh/";
+					nam = "RhDailySpa_";
+					step = 24;
+					ex = ".js";
+					break;
+				case "50":
+					path = "/meteor/Day/Te/";
+					nam = "TeDailySpa_";
+					step = 24;
+					ex = ".js";
+					break;
+				case "4Y":
+					path = "/meteor/Hour/Pr/";
+					nam = "PrHourlySpa_";
+					step = 1;
+					ex = ".js";
+					break;
+				case "4X":
+					path = "/meteor/Hour/Rh/";
+					nam = "RhHourlySpa_";
+					step = 1;
+					ex = ".js";
+					break;
+				case "4W":
+					path = "/meteor/Hour/Te/";
+					nam = "TeHourlySpa_";
+					step = 1;
+					ex = ".js";
+					break;
+				default:
+					return r;
+			}
+			path += foc.tim;
+			nam += foc.area;
+			nam += "_";
+			nam += foc.mod;
+			nam += "_";
+			nam += foc.tim;
+			nam += "_";
+			path += "/";
+			path = foc.resultType.pre + path + nam;
+
+			pt = "";
+			for (i=0; i<foc.tim.length; i++) {
+				pt += foc.tim[i];
+				switch(i) {
+					case 3:
+					case 5:
+						pt += "/";
+						break;
+					case 7:
+						pt += " ";
+						break;
+				}
+			}
+			pt += ":00:00";
+			pt = new Date(pt).valueOf();
+			for (i = foc.start; i < foc.end; i += step) {
+				nam = new LZR.HTML5.Bp.Util.CatchImgByWebsocket.Result({
+					ret: path + LZR.HTML5.Util.format (i, 3, "0") + ex
+				});
+				t = new Date (pt + i * 3600 * 1000);
+				nam.tim = t.getFullYear() + LZR.HTML5.Util.format (t.getMonth()+1, 2, "0") + LZR.HTML5.Util.format (t.getDate(), 2, "0");
+				if (step === 1) {
+					nam.tim += LZR.HTML5.Util.format (t.getHours(), 2, "0");
+				}
+				r.push(nam);
+			}
+			return r;
+		};
 	};
 
 }
 
 function init () {
 	// 加载LZR库
-	// LZR.HTML5.jsPath = "https://ziniulian.github.io/LX_JS/js/old/";
-	LZR.HTML5.jsPath = "/GitLib/LX_JS/js/old/";
+	LZR.HTML5.jsPath = "https://ziniulian.github.io/LX_JS/js/old/";
+	// LZR.HTML5.jsPath = "/GitLib/LX_JS/js/old/";
 	LZR.HTML5.loadJs([
 		LZR.HTML5.jsPath + "HTML5/Bp/AirqMg/RegStat2.js"
 	]);
 	var t = new Test();
+	t.changeFun();
 
 	t.buildMap("map");
 	t.doms = {};

@@ -5,6 +5,7 @@ require("LZR");
 LZR.load([
 	"LZR.NodeJs.BaseMainSrv",
 	"LZR.NodeJs.SampleProxySrv",
+	"LZR.NodeJs.ProSrv.WindSrv",
 	"LZR.NodeJs.SampleWebFileSrv"
 ]);
 
@@ -50,7 +51,13 @@ srv.start({
 	// 简单的代理服务
 	proxy: {
 		cls_: LZR.NodeJs.SampleProxySrv,
-		name: "/Srv/Proxy"
+		name: "/srv/proxy"
+	},
+
+	// 简单的代理服务
+	wind: {
+		cls_: LZR.NodeJs.ProSrv.WindSrv,
+		name: "/srv/wind"
 	},
 
 	// 主页跳转
