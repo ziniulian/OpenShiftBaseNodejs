@@ -27,7 +27,7 @@ hover{
 #top{
 	width:1920px;
 	height:93px;
-	background-image:url(https://ziniulian.github.io/LX_JS/img/web/ReleaseS/head-13.png);
+	background-image:url(https://ziniulian.github.io/LX_JS/img/web/ReleaseS/V0/head-13.png);
 	background-repeat:no-repeat;
 	margin: 0 auto;
 }
@@ -78,7 +78,7 @@ hover{
     height:50px;
 	background-color:#3285ff;
 	border-radius: 6px 6px 0px 0px;
-	background-image:url(https://ziniulian.github.io/LX_JS/img/web/ReleaseS/nav5.png);
+	background-image:url(https://ziniulian.github.io/LX_JS/img/web/ReleaseS/V0/nav5.png);
 	background-repeat:no-repeat;
 	}
 .left_top_l{
@@ -183,7 +183,7 @@ h4{ float:left;
 	color:#666666;
 	width:118px;
 	margin-top:5px;
-	background-image:url(https://ziniulian.github.io/LX_JS/img/web/ReleaseS/button.png);
+	background-image:url(https://ziniulian.github.io/LX_JS/img/web/ReleaseS/V0/button.png);
 }
 .main_middle_top_c{
 	float:left;
@@ -212,7 +212,7 @@ h4{ float:left;
 .main_right_top{height:50px;
 	background-color:#3285ff;
 	border-radius: 6px 6px 0px 0px;
-	background-image:url(https://ziniulian.github.io/LX_JS/img/web/ReleaseS/nav5.png);
+	background-image:url(https://ziniulian.github.io/LX_JS/img/web/ReleaseS/V0/nav5.png);
 	}
 .right_top_l{
 	width:40px;
@@ -267,7 +267,7 @@ line-height:40px;
 text-align:center;
 color:#FFFFFF;
 font-weight:bold;
-background-image:url(https://ziniulian.github.io/LX_JS/img/web/ReleaseS/button7.png);
+background-image:url(https://ziniulian.github.io/LX_JS/img/web/ReleaseS/V0/button7.png);
 }
 .rignt_c_2{
 height:40px;
@@ -362,13 +362,13 @@ background-repeat:no-repeat;
 line-height: 17px;
 }
 .alarm1 {
-	background-image:url(https://ziniulian.github.io/LX_JS/img/web/ReleaseS/b_Level1.png);
+	background-image:url(https://ziniulian.github.io/LX_JS/img/web/ReleaseS/V0/b_Level1.png);
 }
 .alarm2 {
-	background-image:url(https://ziniulian.github.io/LX_JS/img/web/ReleaseS/b_Level2.png);
+	background-image:url(https://ziniulian.github.io/LX_JS/img/web/ReleaseS/V0/b_Level2.png);
 }
 .alarm3 {
-	background-image:url(https://ziniulian.github.io/LX_JS/img/web/ReleaseS/b_Level3.png);
+	background-image:url(https://ziniulian.github.io/LX_JS/img/web/ReleaseS/V0/b_Level3.png);
 }
 
 
@@ -415,7 +415,7 @@ text-align: center;
 margin-left: 26px;
 font-size: 12px;
 line-height: 26px;
-background-image:url(https://ziniulian.github.io/LX_JS/img/web/ReleaseS/button2.png);
+background-image:url(https://ziniulian.github.io/LX_JS/img/web/ReleaseS/V0/button2.png);
 background-repeat:no-repeat;
 
 }/*三级预警,*/
@@ -432,7 +432,7 @@ text-align: center;
 margin-left: 26px;
 font-size: 12px;
 line-height: 26px;
-background-image:url(https://ziniulian.github.io/LX_JS/img/web/ReleaseS/button4.png);
+background-image:url(https://ziniulian.github.io/LX_JS/img/web/ReleaseS/V0/button4.png);
 background-repeat:no-repeat;
 
 }/*二级预警,*/
@@ -447,7 +447,7 @@ text-align: center;
 margin-left: 26px;
 font-size: 12px;
 line-height: 26px;
-background-image:url(https://ziniulian.github.io/LX_JS/img/web/ReleaseS/button5.png);
+background-image:url(https://ziniulian.github.io/LX_JS/img/web/ReleaseS/V0/button5.png);
 background-repeat:no-repeat;
 
 }/*一级预警*/
@@ -697,7 +697,7 @@ font-size: 14px;
 margin-top: 5px;
 text-align: center;
 line-height: 25px;
-background-image:url(https://ziniulian.github.io/LX_JS/img/web/ReleaseS/bpm2.5.png);
+background-image:url(https://ziniulian.github.io/LX_JS/img/web/ReleaseS/V0/bpm2.5.png);
 color:#002c91;
 
 
