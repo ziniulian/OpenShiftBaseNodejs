@@ -30,20 +30,20 @@ function init() {
 
 	// 配置信息
 	hwo.dataIp = "http://192.168.1.235/hbServer/api/CityPublishInfo/GetProvinceAndCityPublishData?publishDate=";
-	hw.Efl.emnull.imgUrl = "https://ziniulian.github.io/LX_JS/img/web/ReleaseS/a_Level0";
-	hw.Efl.v1.imgUrl = "https://ziniulian.github.io/LX_JS/img/web/ReleaseS/a_Level1";
-	hw.Efl.v2.imgUrl = "https://ziniulian.github.io/LX_JS/img/web/ReleaseS/a_Level2";
-	hw.Efl.v3.imgUrl = "https://ziniulian.github.io/LX_JS/img/web/ReleaseS/a_Level3";
-	hw.Efl.v4.imgUrl = "https://ziniulian.github.io/LX_JS/img/web/ReleaseS/a_Level4";
-	hw.Efl.v5.imgUrl = "https://ziniulian.github.io/LX_JS/img/web/ReleaseS/a_Level5";
-	hw.Efl.v6.imgUrl = "https://ziniulian.github.io/LX_JS/img/web/ReleaseS/a_Level6";
-	hw.Efl.emnull.mapImgUrl = "https://ziniulian.github.io/LX_JS/img/web/ReleaseS/Level0";
-	hw.Efl.v1.mapImgUrl = "https://ziniulian.github.io/LX_JS/img/web/ReleaseS/Level1";
-	hw.Efl.v2.mapImgUrl = "https://ziniulian.github.io/LX_JS/img/web/ReleaseS/Level2";
-	hw.Efl.v3.mapImgUrl = "https://ziniulian.github.io/LX_JS/img/web/ReleaseS/Level3";
-	hw.Efl.v4.mapImgUrl = "https://ziniulian.github.io/LX_JS/img/web/ReleaseS/Level4";
-	hw.Efl.v5.mapImgUrl = "https://ziniulian.github.io/LX_JS/img/web/ReleaseS/Level5";
-	hw.Efl.v6.mapImgUrl = "https://ziniulian.github.io/LX_JS/img/web/ReleaseS/Level6";
+	hw.Efl.emnull.imgUrl = "https://ziniulian.github.io/LX_JS/img/web/ReleaseS/V0/a_Level0";
+	hw.Efl.v1.imgUrl = "https://ziniulian.github.io/LX_JS/img/web/ReleaseS/V0/a_Level1";
+	hw.Efl.v2.imgUrl = "https://ziniulian.github.io/LX_JS/img/web/ReleaseS/V0/a_Level2";
+	hw.Efl.v3.imgUrl = "https://ziniulian.github.io/LX_JS/img/web/ReleaseS/V0/a_Level3";
+	hw.Efl.v4.imgUrl = "https://ziniulian.github.io/LX_JS/img/web/ReleaseS/V0/a_Level4";
+	hw.Efl.v5.imgUrl = "https://ziniulian.github.io/LX_JS/img/web/ReleaseS/V0/a_Level5";
+	hw.Efl.v6.imgUrl = "https://ziniulian.github.io/LX_JS/img/web/ReleaseS/V0/a_Level6";
+	hw.Efl.emnull.mapImgUrl = "https://ziniulian.github.io/LX_JS/img/web/ReleaseS/V0/Level0";
+	hw.Efl.v1.mapImgUrl = "https://ziniulian.github.io/LX_JS/img/web/ReleaseS/V0/Level1";
+	hw.Efl.v2.mapImgUrl = "https://ziniulian.github.io/LX_JS/img/web/ReleaseS/V0/Level2";
+	hw.Efl.v3.mapImgUrl = "https://ziniulian.github.io/LX_JS/img/web/ReleaseS/V0/Level3";
+	hw.Efl.v4.mapImgUrl = "https://ziniulian.github.io/LX_JS/img/web/ReleaseS/V0/Level4";
+	hw.Efl.v5.mapImgUrl = "https://ziniulian.github.io/LX_JS/img/web/ReleaseS/V0/Level5";
+	hw.Efl.v6.mapImgUrl = "https://ziniulian.github.io/LX_JS/img/web/ReleaseS/V0/Level6";
 	hw.Efl.emnull.numCss = "number-0";
 	hw.Efl.v1.numCss = "number-a";
 	hw.Efl.v2.numCss = "number-b";
@@ -445,7 +445,7 @@ function init() {
 	};
 	for (s in v.chd_) {
 		v.chd_[s].level = "city";
-		v.chd_[s].imgUrl = "https://ziniulian.github.io/LX_JS/img/web/ReleaseS/" + s + ".png";
+		v.chd_[s].imgUrl = "https://ziniulian.github.io/LX_JS/img/web/ReleaseS/V0/" + s + ".png";
 		v.chd_[s].hd_aqis = {
 				"24": t(),
 				"48": t(),
@@ -516,7 +516,7 @@ function init() {
 			d = doeo.dat;
 			r = d.root.get();
 			// d.boardDoe.doe.src = d.imgUrl;
-			d.boardDoe.doe.src = "https://ziniulian.github.io/LX_JS/img/web/ReleaseS/" + d.id.get() + ".png";
+			d.boardDoe.doe.src = "https://ziniulian.github.io/LX_JS/img/web/ReleaseS/V0/" + d.id.get() + ".png";
 			d.boardDoe.delCss("nosee");
 
 			// 显示提示框
@@ -524,7 +524,7 @@ function init() {
 		} else {
 			d = old.dat;
 			r = d.root.get();
-			d.boardDoe.doe.src = "https://ziniulian.github.io/LX_JS/img/web/ReleaseS/city_.png";
+			d.boardDoe.doe.src = "https://ziniulian.github.io/LX_JS/img/web/ReleaseS/V0/city_.png";
 			r.hidTitl.call(r.titl);
 		}
 	};
