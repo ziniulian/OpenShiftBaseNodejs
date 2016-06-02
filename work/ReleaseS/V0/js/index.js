@@ -142,7 +142,7 @@ function init() {
 		v.view = hwo.tips.view;
 		hwo.tips.ctrl.add (v);
 	}
-	hwo.tips.subs.t1.dat.vcScd.set(true);
+	hwo.tips.subs.t1.dat.hct_scd.set(true);
 
 	// 时间控制
 	hwo.tim = new hw.Doe ({ hd_doe: tim });
@@ -608,6 +608,6 @@ function init() {
 // console.log (hwo);
 
 	// 启动
-	hwo.tim.getById("tim24").dat.vcScd.set(true);
+	hwo.tim.getById("tim24").dat.hct_scd.set(true);
 
 }

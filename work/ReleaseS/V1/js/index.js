@@ -610,7 +610,7 @@ function healthBoard (titleID, contentID, selectedCSS) {
 		v.view = r.view;
 		r.ctrl.add (v);
 	}
-	r.subs.t1.dat.vcScd.set(true);
+	r.subs.t1.dat.hct_scd.set(true);
 	return r;
 }
 
