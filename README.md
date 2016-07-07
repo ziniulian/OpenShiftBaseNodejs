@@ -49,11 +49,16 @@
 [点此浏览](http://www.jiangzi.cf/show/ReleaseS/V0/index.html)
 >
 [点此浏览](http://www.jiangzi.cf/show/ReleaseS/V1/index.html)
+>
+[点此浏览](http://www.jiangzi.cf/show/ReleaseS/V2/index.html)
 
 *****
 
 开发明细：
 -------------------------------------------------------------------
+
+##### 2016-7-7：
+	升级一个作品
 
 ##### 2016-6-12：
 	ReleaseS_V0 改用百分比布局
