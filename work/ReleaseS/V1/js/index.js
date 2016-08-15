@@ -705,7 +705,7 @@ function init () {
 	hw.Ewp = EmWindPower();
 
 	// 气象数据
-	hwo.wDat = getWeatherData();
+	hwo.wDat = getWeatherData();	// （单机）
 	// hwo.wDat = getWeatherData(hwo.weatherIP);
 
 	// 填充气象数据
