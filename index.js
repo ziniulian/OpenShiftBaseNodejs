@@ -2,7 +2,10 @@
 console.log ("---0000---");
 require("LZR");
 console.log ("---0001---");
+console.log (process.env.OPENSHIFT_NODEJS_IP);
+console.log (process.env.OPENSHIFT_NODEJS_PORT);
 
+/*
 // LZR 子模块加载
 LZR.load([
 	"LZR.Node.Srv"
@@ -42,3 +45,4 @@ console.log ("---0004---");
 // 服务启动
 srv.start();
 console.log ("---0005---");
+*/
