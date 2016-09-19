@@ -4,6 +4,7 @@ var express = require('express');
 LZR.singletons.nodejsTools.express = express;
 
 
+
 var app = express();
 var ip = process.env.OPENSHIFT_NODEJS_IP || "192.168.1.236";
 var port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
@@ -84,18 +85,14 @@ srv.start({
 LZR.load([
 	"LZR.Node.Srv"
 ]);
-/*
+
 // 服务的实例化
-var srv = new LZR.Node.Srv ({
-	ip: process.env.OPENSHIFT_NODEJS_IP || "192.168.1.236",
-	port: process.env.OPENSHIFT_NODEJS_PORT || 8080
-});
-*/
+var srv = new LZR.Node.Srv ();
+
 // srv.so.use(express.static("./web"));
 // srv.so.listen(srv.port, srv.ip);
 
 app.listen(port, ip);
-
 
 /*
 // LZR库文件访问服务
