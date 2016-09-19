@@ -1,18 +1,16 @@
 // LZR 模块加载
 require("LZR");
-var express = require('express');
-var app = express();
 // LZR.singletons.nodejsTools.express = express;
 
-/*
+
 var express = require('express');
 var app = express();
 var ip = process.env.OPENSHIFT_NODEJS_IP || "192.168.1.236";
 var port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
 
-app.use(express.static('./web'));
+// app.use(express.static('./web'));
 app.listen(port, ip);
-*/
+
 
 /*
 // LZR 子模块加载
@@ -84,7 +82,7 @@ srv.start({
 });
 */
 
-
+/*
 // LZR 子模块加载
 LZR.load([
 	"LZR.Node.Srv"
@@ -100,7 +98,7 @@ var srv = new LZR.Node.Srv ({
 // srv.so.listen(srv.port, srv.ip);
 
 app.listen(srv.port, srv.ip);
-
+*/
 
 /*
 // LZR库文件访问服务
