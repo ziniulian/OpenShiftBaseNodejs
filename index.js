@@ -87,7 +87,10 @@ LZR.load([
 ]);
 
 // 服务的实例化
-var srv = new LZR.Node.Srv ();
+var srv = new LZR.Node.Srv ({
+	ip: process.env.OPENSHIFT_NODEJS_IP || "192.168.1.236",
+	port: process.env.OPENSHIFT_NODEJS_PORT || 8080
+});
 
 // srv.so.use(express.static("./web"));
 // srv.so.listen(srv.port, srv.ip);
