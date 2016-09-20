@@ -15,7 +15,7 @@ var srv = new LZR.Node.Srv ({
 // srv.ro.setStaticDir("/", "./web");
 
 var b = srv.ro.ep.Router();
-console.log (b);
+console.log (b.use);
 /*
 srv.ro.ro.use("/", function (req, res, next) {
 	res.send("Hello World");
