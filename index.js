@@ -94,13 +94,13 @@ var srv = new LZR.Node.Srv ({
 
 // srv.so = app;
 // srv.so.use(express.static("./web"));
-// srv.so.listen(srv.port, srv.ip);
+srv.so.listen(srv.port, srv.ip);
 // srv.so.listen(port, ip);
 
 // srv.ep = express;
 // srv.so = app;
 
-app.listen(srv.port, srv.ip);
+// app.listen(srv.port, srv.ip);
 // app.listen(port, ip);
 
 /*
