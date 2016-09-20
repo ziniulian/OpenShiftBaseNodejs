@@ -1,5 +1,6 @@
 // LZR 模块加载
 require("LZR");
+var exx = require("express");
 
 // LZR 子模块加载
 LZR.load([
@@ -14,7 +15,7 @@ var srv = new LZR.Node.Srv ({
 
 // srv.ro.setStaticDir("/", "./web");
 
-var b = srv.ro.ep.Router();
+var b = exx.Router();
 console.log (b.use);
 /*
 srv.ro.ro.use("/", function (req, res, next) {
