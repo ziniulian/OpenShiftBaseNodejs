@@ -13,9 +13,6 @@ var srv = new LZR.Node.Srv ({
 	port: process.env.OPENSHIFT_NODEJS_PORT || 8080
 });
 
-// srv.so.listen(srv.port, srv.ip);
-
-/*
 // LZR库文件访问服务
 srv.ro.setStaticDir("/myLib/", LZR.curPath);
 
@@ -37,7 +34,6 @@ srv.use("*", function (req, res, next) {
 	res.writeHead(404, { "Content-Type": "text/plain" });
 	res.end("404!");
 });
-*/
 
 // 服务启动
 srv.start();
