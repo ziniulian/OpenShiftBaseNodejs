@@ -14,7 +14,7 @@ var srv = new LZR.Node.Srv ({
 
 // srv.ro.setStaticDir("/", "./web");
 
-srv.ro.get("*", function (req, res, next) {
+srv.ro.ro.get("*", function (req, res, next) {
 	res.writeHead(404, { "Content-Type": "text/plain" });
 	res.end("404!");
 });
