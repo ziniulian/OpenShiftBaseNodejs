@@ -1,6 +1,5 @@
 // LZR 模块加载
 require("LZR");
-var exx = require("express");
 
 // LZR 子模块加载
 LZR.load([
