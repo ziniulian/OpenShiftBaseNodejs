@@ -14,7 +14,7 @@ var srv = new LZR.Node.Srv ({
 
 // srv.ro.setStaticDir("/", "./web");
 
-console.log (srv.ro.ro);
+console.log (srv.ro.ro.use);
 /*
 srv.ro.ro.use("/", function (req, res, next) {
 	res.send("Hello World");
