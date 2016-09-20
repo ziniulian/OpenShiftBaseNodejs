@@ -13,18 +13,7 @@ var srv = new LZR.Node.Srv ({
 	port: process.env.OPENSHIFT_NODEJS_PORT || 8080
 });
 
-// srv.ro.setStaticDir("/", "./web");
-
-// var b = exx.Router();
-// console.log (b.use);
-/*
-srv.ro.ro.use("/", function (req, res, next) {
-	res.send("Hello World");
-	// res.writeHead(404, { "Content-Type": "text/plain" });
-	// res.end("404!");
-});
-*/
-srv.so.listen(srv.port, srv.ip);
+// srv.so.listen(srv.port, srv.ip);
 
 /*
 // LZR库文件访问服务
@@ -48,7 +37,7 @@ srv.use("*", function (req, res, next) {
 	res.writeHead(404, { "Content-Type": "text/plain" });
 	res.end("404!");
 });
+*/
 
 // 服务启动
 srv.start();
-*/
