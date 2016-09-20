@@ -1,13 +1,13 @@
 // LZR 模块加载
 require("LZR");
-var express = require('express');
-LZR.singletons.nodejsTools.express = express;
+// var express = require('express');
+// LZR.singletons.nodejsTools.express = express;
 
 
 
-var app = express();
-var ip = process.env.OPENSHIFT_NODEJS_IP || "192.168.1.236";
-var port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
+// var app = express();
+// var ip = process.env.OPENSHIFT_NODEJS_IP || "192.168.1.236";
+// var port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
 
 
 /*
@@ -88,8 +88,8 @@ LZR.load([
 
 // 服务的实例化
 var srv = new LZR.Node.Srv ({
-	ip: ip,
-	port: port
+	ip: process.env.OPENSHIFT_NODEJS_IP || "192.168.1.236",
+	port: process.env.OPENSHIFT_NODEJS_PORT || 8080
 });
 
 // srv.so = app;
