@@ -92,6 +92,7 @@ var srv = new LZR.Node.Srv ({
 	port: port
 });
 
+srv.so = app;
 // srv.so.use(express.static("./web"));
 // srv.so.listen(srv.port, srv.ip);
 
