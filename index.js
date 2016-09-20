@@ -12,6 +12,8 @@ var srv = new LZR.Node.Srv ({
 	port: process.env.OPENSHIFT_NODEJS_PORT || 8080
 });
 
+srv.ro.setStaticDir("/", "./web");
+
 srv.so.listen(srv.port, srv.ip);
 
 /*
