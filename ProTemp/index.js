@@ -2,7 +2,8 @@ eval("var curPath = " + LZR.getNodejsModelPath.toString() +
 	"('./', 'index.js') + '/';");
 
 var r = new LZR.Node.Router ({
-	path: curPath
+	path: curPath,
+	hd_web: "web"
 });
 
 // 嵌入其它项目

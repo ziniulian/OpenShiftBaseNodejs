@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Ajax 跨域测试</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0" />
+		<meta charset="utf-8" />
+
+		<style type="text/css">
+			html, body {
+				padding: 0;
+				margin: 0;
+				height: 100%;
+			}
+
+			.boso {
+				width: 100%;
+				height: 100%;
+			}
+
+			.item {
+				display: inline-block;
+				width: 300px;
+				height: 300px;
+				margin: 10px;
+				background-image: url();
+				background-repeat: no-repeat;
+				background-position: center center;
+				background-size: contain;
+			}
+		</style>
+
+		<script>
+			function init() {
+				boso.onclick = function (e) {
+					var xhr = new XMLHttpRequest();
+					var infoUrl = "http://localhost/err/";
+					xhr.open("GET", infoUrl, false);
+					try {
+						xhr.send();
+					} catch (e) {
+						// 错误处理
+					}
+					console.log ("End!");
+				}
+			}
+		</script>
+	</head>
+
+	<body>
+		<div id="boso" class="boso">
+			
+		</div>
+	</body>
+
+	<script type="text/javascript">
+		document.body.onload = init;
+	</script>
+</html>
