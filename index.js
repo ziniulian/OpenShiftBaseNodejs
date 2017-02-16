@@ -12,6 +12,12 @@ var srv = new LZR.Node.Srv ({
 	port: process.env.OPENSHIFT_NODEJS_PORT || 80
 });
 
+// 设置 Ajax 跨域权限
+srv.use("*", function (req, res, next) {
+	res.set({"Access-Control-Allow-Origin": "*"});
+	next();
+});
+
 // LZR库文件访问服务
 srv.ro.setStaticDir("/myLib/", LZR.curPath);
 
@@ -22,16 +28,20 @@ srv.ro.get("/favicon.ico", function (req, res) {
 	});
 });
 
+// 静态主页设置
+srv.ro.setStaticDir("/", "./web");
+
 // 其它项目加载测试
-// srv.use("/Temp/", require("./ProTemp"));
+srv.use("/Temp/", require("./ProTemp"));
 
 // 作品秀
 srv.use("/Show/", require("./WorkSpace"));
 
 // 收尾处理
-srv.use("*", function (req, res, next) {
-	res.writeHead(404, { "Content-Type": "text/plain" });
-	res.end("404!");
+srv.use("*", function (req, res) {
+	res.status(404).sendFile("err.html", {
+		root: "./web/"
+	});
 });
 
 // 服务启动
