@@ -6,4 +6,7 @@ var r = new LZR.Node.Router ({
 	hd_web: "web"
 });
 
+// 作品秀
+r.use("/Ttm/", require("./TmpTagMgmt"));
+
 module.exports = r;

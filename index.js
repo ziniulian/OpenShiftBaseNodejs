@@ -31,9 +31,6 @@ srv.ro.get("/favicon.ico", function (req, res) {
 // 静态主页设置
 srv.ro.setStaticDir("/", "./web");
 
-// 其它项目加载测试
-srv.use("/Temp/", require("./ProTemp"));
-
 // 作品秀
 srv.use("/Show/", require("./WorkSpace"));
 
