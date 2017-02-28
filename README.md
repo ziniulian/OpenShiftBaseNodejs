@@ -12,19 +12,25 @@
 
 >####/web/####
 >
-测试网站： [点此浏览](http://www.jiangzi.cf/)
+测试网站： [点此浏览](https://openshiftbasenodejs-ziniulian.rhcloud.com/)
 
 *****
 
 >####/myLib/####
 >
-库源码访问端口：可访问LZR库中的所有源码。 [点此浏览](http://www.jiangzi.cf/myLib/LZR/Node.js)
+库源码访问端口：可访问LZR库中的所有源码。 [点此浏览](https://openshiftbasenodejs-ziniulian.rhcloud.com/myLib/LZR/Node.js)
 
 *****
 
 >####/Show/####
 >
-作品端口： [点此浏览](http://www.jiangzi.cf/Show/)
+作品端口： [点此浏览](https://openshiftbasenodejs-ziniulian.rhcloud.com/Show/)
+
+*****
+
+>####/Show/####
+>
+温控标签管理系统： [点此浏览](https://openshiftbasenodejs-ziniulian.rhcloud.com/Show/Ttm/)
 
 *****
 
