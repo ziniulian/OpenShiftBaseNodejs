@@ -46,6 +46,7 @@
 		</div>
 	</body>
 
+{{? it.logs}}
 	<script type="text/javascript">
 		var initObj = {
 			logs: '{{=it.logs}}',
@@ -55,4 +56,5 @@
 		};
 		document.body.onload = init;
 	</script>
+{{?}}
 </html>

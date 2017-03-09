@@ -7,14 +7,11 @@ function init () {
 	var tims = [];
 	var tmps = [];
 	var to;
-	var td;
 	for (var s in dat) {
 		if (to) {
-			td += 300000;
-			to.setTime(td);
+			to.setTime(s * 1000);
 		} else {
-			td = s * 1000;
-			to = new Date(td);
+			to = new Date(s * 1000);
 		}
 
 		tims.push(to.getHours() + ":" + to.getMinutes());
@@ -22,9 +19,9 @@ function init () {
 	}
 
 	var op = {
-        tooltip: {
-            trigger: "axis"
-        },
+		tooltip: {
+			trigger: "axis"
+		},
 		xAxis: {
 			name: "时间",
 			data: tims
