@@ -4,6 +4,7 @@
 	"main": "index.js",
 	"dependencies": {
 		"express": "4.x",
-		"dot": "1.1.1"
+		"dot": "1.1.1",
+		"mysql": "2.13.0"
 	}
 }
