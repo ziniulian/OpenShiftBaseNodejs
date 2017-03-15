@@ -28,14 +28,25 @@
 
 *****
 
->####/Show/####
+>####/Show/Ttm/####
 >
 温控标签管理系统： [点此浏览](https://openshiftbasenodejs-ziniulian.rhcloud.com/Show/Ttm/)
+>
+温控标签管理系统（连接数据库版本）： [点此浏览](https://test-ziniulian.rhcloud.com/)
+
+*****
+
+>####/rongzi/####
+>
+国债逆回购收益对比表 ： [点此浏览](https://openshiftbasenodejs-ziniulian.rhcloud.com/rongzi)
 
 *****
 
 开发明细：
 -------------------------------------------------------------------
+
+##### 2017-3-15：
+	国债逆回购收益对比表
 
 ##### 2016-9-20： express 框架调试 OK
 	package.json 里要配置关联模块及版本信息
