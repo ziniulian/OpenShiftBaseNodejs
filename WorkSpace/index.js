@@ -6,7 +6,7 @@ var r = new LZR.Node.Router ({
 	hd_web: "web"
 });
 
-// 作品秀
+// 温度标签测试
 r.use("/Ttm/", require("./TmpTagMgmt"));
 
 module.exports = r;
