@@ -15,7 +15,7 @@ var srv = new LZR.Node.Srv ({
 
 // 数据库
 var mdb = new LZR.Node.Db ({
-	conf: process.env.OPENSHIFT_MONGODB_DB_HOST ? (process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +  process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" + process.env.OPENSHIFT_MONGODB_DB_HOST + "/test") : "mongodb://localhost:27017/test",
+	conf: process.env.OPENSHIFT_MONGODB_DB_HOST ? ("mongodb://" + process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +  process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" + process.env.OPENSHIFT_MONGODB_DB_HOST + ":" + process.env.OPENSHIFT_MONGODB_DB_PORT + "/test") : "mongodb://localhost:27017/test",
 	hd_sqls: {
 		srvTrace: {
 			tnam: "vs",
@@ -55,6 +55,8 @@ srv.ro.get("/testMongo/", function (req, res, next) {
 	var s = "OPENSHIFT_MONGODB_DB_USERNAME : " + process.env.OPENSHIFT_MONGODB_DB_USERNAME;
 	s += " , OPENSHIFT_MONGODB_DB_PASSWORD : " + process.env.OPENSHIFT_MONGODB_DB_PASSWORD;
 	s += " , OPENSHIFT_MONGODB_DB_HOST : " + process.env.OPENSHIFT_MONGODB_DB_HOST;
+	s += " , OPENSHIFT_MONGODB_DB_PORT : " + process.env.OPENSHIFT_MONGODB_DB_PORT;
+	s += " ----- " + "mongodb://" + process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +  process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" + process.env.OPENSHIFT_MONGODB_DB_HOST + ":" + process.env.OPENSHIFT_MONGODB_DB_PORT + "/test"
 	res.send(s);
 })
 
