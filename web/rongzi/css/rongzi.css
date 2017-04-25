@@ -5,12 +5,12 @@ html, body {
 	font-size: 24px;
 	font-size: 3vw;
 	color: #333;
+	background-color: #FF0;
 }
 
 .boso {
 	font-size: 0;
 	text-align: center;
-	background-color: #FF0;
 }
 
 .tim {

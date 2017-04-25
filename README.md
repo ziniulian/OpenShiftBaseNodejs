@@ -22,20 +22,6 @@
 
 *****
 
->####/Show/####
->
-作品端口： [点此浏览](https://openshiftbasenodejs-ziniulian.rhcloud.com/Show/)
-
-*****
-
->####/Show/Ttm/####
->
-温控标签管理系统： [点此浏览](https://openshiftbasenodejs-ziniulian.rhcloud.com/Show/Ttm/)
->
-温控标签管理系统（连接数据库版本）： [点此浏览](https://test-ziniulian.rhcloud.com/)
-
-*****
-
 >####/rongzi/####
 >
 国债逆回购收益对比表 ： [点此浏览](https://openshiftbasenodejs-ziniulian.rhcloud.com/rongzi)
@@ -44,6 +30,9 @@
 
 开发明细：
 -------------------------------------------------------------------
+
+##### 2017-4-25：
+	日记的数据库管理
 
 ##### 2017-3-15：
 	国债逆回购收益对比表

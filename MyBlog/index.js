@@ -83,7 +83,8 @@ r.get("/srvGetBlog/:size?/:sort?/:top?/:max?/:min?", function (req, res, next) {
 	var min = req.params.min;
 	var s;
 	if (top == 0) top = undefined;
-	if (sort == 1) {
+	if (sort > 0) {
+		sort = 1;
 		s = top || min;
 		if (max) {
 			s = "{\"tim\" : {\"$lte\": " + max + ", \"$gte\": " + s + "}}";
@@ -110,49 +111,6 @@ r.get("/srvGetBlog/:size?/:sort?/:top?/:max?/:min?", function (req, res, next) {
 
 	mdb.qry("srvGetBlog", req, res, next, [s, sort, size]);
 });
-
-// // 获取日记信息
-// r.get("/hom/:size?/:sort?/:top?/:year?/:month?", function (req, res, next) {
-// 	req.qpobj = {
-// 		size: req.params.size || "10",
-// 		sort: req.params.sort || "-1",
-// 		top: req.params.top || 0,
-// 		y: req.params.year || 0,
-// 		m: req.params.month || 0
-// 	};
-// 	var td = new Date();
-// 	var to = td.getTimezoneOffset() * 60000;
-// 	var tp = 3600 * 1000 * 24;
-// 	var max, min, s;
-// 	if (req.qpobj.y) {
-// 		req.qpobj.y = (req.qpobj.y - 0);
-// 		if (req.qpobj.m) {
-// 			req.qpobj.m = (req.qpobj.m - 0);
-// 			min = new Date (req.qpobj.y + "/" + req.qpobj.m + "/1");
-// 			if (req.qpobj.m === 12) {
-// 				s = req.qpobj.y + 1;
-// 				s = s + "/1/1";
-// 			} else {
-// 				s = req.qpobj.m + 1;
-// 				s = req.qpobj.y + "/" + s + "/1";
-// 			}
-// 			max = new Date (s);
-// 		} else {
-// 			min = new Date (req.qpobj.y + "/1/1");
-// 			s = req.qpobj.y + 1;
-// 			max = new Date (s + "/1/1");
-// 		}
-// 		max = Math.floor((max.valueOf() - to) / tp);
-// 		min = Math.floor((min.valueOf() - to) / tp);
-// 		s = '{"tim" : {"$lt": ' + max + ', "$gte": ' + min + "}}";
-// 	} else if (req.qpobj.top) {
-// 		s = '{"tim": {"$lt": ' + req.qpobj.top + "}}";
-// 	} else {
-// 		s = "{}";
-// 	}
-//
-// 	mdb.qry("getBlog", req, res, next, [s, req.params.sort, req.params.size]);
-// });
 
 // // 初始化模板
 // r.initTmp();
