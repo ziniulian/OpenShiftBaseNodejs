@@ -9,6 +9,7 @@ eval("var curPath = " + LZR.getNodejsModelPath.toString() +
 // 数据库
 var mdb = new LZR.Node.Db ({
 	conf: process.env.OPENSHIFT_MONGODB_DB_URL ? process.env.OPENSHIFT_MONGODB_DB_URL : "mongodb://localhost:27017/test",
+	dbNam: process.env.OPENSHIFT_MONGODB_DB_URL ? "test" : "",
 	hd_sqls: {
 		srvGetBlog: {
 			tnam: "blog",
