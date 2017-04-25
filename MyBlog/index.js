@@ -44,6 +44,10 @@ mdb.evt.srvBlogCount.add(function (r, req, res, next) {
 	res.send(r.toString());
 });
 
+mdb.err.connect.add(function (e, req, res, next) {
+	res.send(e);
+});
+
 // 创建路由
 var r = new LZR.Node.Router ({
 	path: curPath,
