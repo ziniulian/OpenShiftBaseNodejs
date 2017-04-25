@@ -56,6 +56,7 @@ srv.ro.get("/testMongo/", function (req, res, next) {
 	s += " , OPENSHIFT_MONGODB_DB_PASSWORD : " + process.env.OPENSHIFT_MONGODB_DB_PASSWORD;
 	s += " , OPENSHIFT_MONGODB_DB_HOST : " + process.env.OPENSHIFT_MONGODB_DB_HOST;
 	s += " , OPENSHIFT_MONGODB_DB_PORT : " + process.env.OPENSHIFT_MONGODB_DB_PORT;
+	s += " , OPENSHIFT_MONGODB_DB_URL : " + process.env.OPENSHIFT_MONGODB_DB_URL;
 	s += " ----- " + "mongodb://" + process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +  process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" + process.env.OPENSHIFT_MONGODB_DB_HOST + ":" + process.env.OPENSHIFT_MONGODB_DB_PORT + "/test"
 	res.send(s);
 })
