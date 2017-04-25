@@ -15,7 +15,7 @@ var srv = new LZR.Node.Srv ({
 
 // 数据库
 var mdb = new LZR.Node.Db ({
-	conf: process.env.OPENSHIFT_MONGODB_DB_HOST ? ("mongodb://" + process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +  process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" + process.env.OPENSHIFT_MONGODB_DB_HOST + ":" + process.env.OPENSHIFT_MONGODB_DB_PORT + "/test") : "mongodb://localhost:27017/test",
+	conf: process.env.OPENSHIFT_MONGODB_DB_URL ? (process.env.OPENSHIFT_MONGODB_DB_URL + "test") : "mongodb://localhost:27017/test",
 	hd_sqls: {
 		srvTrace: {
 			tnam: "vs",
