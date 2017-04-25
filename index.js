@@ -51,6 +51,13 @@ srv.ro.get("/srvTrace/:url/:uuid", function (req, res, next) {
 	res.send("OK");
 });
 
+srv.ro.get("/testMongo/", function (req, res, next) {
+	var s = "OPENSHIFT_MONGODB_DB_USERNAME : " + process.env.OPENSHIFT_MONGODB_DB_USERNAME;
+	s += " , OPENSHIFT_MONGODB_DB_PASSWORD : " + process.env.OPENSHIFT_MONGODB_DB_PASSWORD;
+	s += " , OPENSHIFT_MONGODB_DB_HOST : " + process.env.OPENSHIFT_MONGODB_DB_HOST;
+	res.send(s);
+})
+
 // 作品秀
 // srv.use("/Show/", require("./WorkSpace"));
 
