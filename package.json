@@ -5,6 +5,7 @@
 	"dependencies": {
 		"express": "4.x",
 		"dot": "1.1.1",
-		"mysql": "2.13.0"
+		"mysql": "2.13.x",
+		"mongodb": "2.2.x"
 	}
 }
