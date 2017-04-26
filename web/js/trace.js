@@ -31,7 +31,7 @@ function trace () {
     ]);
 
     var aj = new LZR.HTML.Base.Ajax ();
-    var url = encodeURIComponent(window.location.pathname);
+    var url = encodeURIComponent(window.location.pathname).replace(/%/g, "_qb_");
     var uuid = getFingerprint();
     aj.get (("/srvTrace/" + url + "/" + uuid), true);
 }

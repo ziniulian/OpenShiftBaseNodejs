@@ -48,7 +48,8 @@ srv.ro.setStaticDir("/", "./web");
 
 // 网站追踪服务
 srv.ro.get("/srvTrace/:url/:uuid", function (req, res, next) {
-	mdb.qry("srvTrace", req, res, next, [Date.now(), req.params.url, req.params.uuid]);
+	var u = decodeURIComponent(req.params.url.replace(/_qb_/g, "%"));
+	mdb.qry("srvTrace", req, res, next, [Date.now(), u, req.params.uuid]);
 	res.send("OK");
 });
 
