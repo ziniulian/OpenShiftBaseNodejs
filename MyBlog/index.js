@@ -8,7 +8,8 @@ eval("var curPath = " + LZR.getNodejsModelPath.toString() +
 
 // 数据库
 var mdb = new LZR.Node.Db ({
-	conf: process.env.OPENSHIFT_MONGODB_DB_URL ? process.env.OPENSHIFT_MONGODB_DB_URL : "mongodb://localhost:27017/test",
+	conf: process.env.OPENSHIFT_MONGODB_DB_URL ? "mongodb://127.0.0.1:888/" : "mongodb://localhost:27017/test",
+	autoErr: true,
 	hd_sqls: {
 		srvGetBlog: {
 			db: "test",
@@ -45,10 +46,6 @@ mdb.evt.srvGetBlog.add(function (r, req, res, next) {
 
 mdb.evt.srvBlogCount.add(function (r, req, res, next) {
 	res.send(r.toString());
-});
-
-mdb.err.connect.add(function (e, req, res, next) {
-	res.send(e);
 });
 
 // 创建路由
