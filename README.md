@@ -10,26 +10,23 @@
 
 *****
 
->####/web/####
->
 测试网站： [点此浏览](https://openshiftbasenodejs-ziniulian.rhcloud.com/)
 
 *****
 
->####/myLib/####
->
 库源码访问端口：可访问LZR库中的所有源码。 [点此浏览](https://openshiftbasenodejs-ziniulian.rhcloud.com/myLib/LZR/Node.js)
 
 *****
 
->####/rongzi/####
->
-国债逆回购收益对比表 ： [点此浏览](https://openshiftbasenodejs-ziniulian.rhcloud.com/rongzi)
+国债逆回购收益对比表 ： [点此浏览](https://openshiftbasenodejs-ziniulian.rhcloud.com/Gu/rongzi.html)
 
 *****
 
 开发明细：
 -------------------------------------------------------------------
+
+##### 2017-4-28：
+	自选股页面
 
 ##### 2017-4-26：
 	Mongo数据库连接调试

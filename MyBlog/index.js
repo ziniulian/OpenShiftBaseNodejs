@@ -14,7 +14,6 @@ var mdb = new LZR.Node.Db ({
 		srvGetBlog: {
 			db: "test",
 			tnam: "blog",
-			evt: true,
 			funs: {
 				find: ["<0>", {"_id": 0, "tim": 1, "gistId": 1, "title": 1}],
 				sort: ['{"tim": <1>}'],
@@ -32,7 +31,6 @@ var mdb = new LZR.Node.Db ({
 		srvBlogCount: {
 			db: "test",
 			tnam: "blog",
-			evt: true,
 			funs: {
 				count: []
 			}
