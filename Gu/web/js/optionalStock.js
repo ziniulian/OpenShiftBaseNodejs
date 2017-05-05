@@ -1,91 +1,21 @@
 function init() {
-    qry();
+    var d = window.lzr_optionalStock_dat;
+    d.unshift(d.length);
+    qry(d);
 }
 
-function getDat() {
-    return [
-        {
-            num: "sh000001",
-            nam: "SH"
-        },
-        {
-            num: "sz399001",
-            nam: "SZ"
-        },
-        {
-            num: "sh600000",
-            nam: "PF",
-            p: 15.08,
-            v: 1,
-            min: 14.95,
-            max: 15.6,
-            vmin: 90000,
-            vmax: 400000
-        },
-        {
-            num: "sz000661",
-            nam: "GX",
-            p: 114.4,
-            v: 1,
-            min: 113,
-            max: 118,
-            vmin: 8000,
-            vmax: 30000
-        },
-        {
-            num: "sh600660",
-            nam: "FY",
-            p: 0,
-            v: 0,
-            min: 22,
-            max: 99,
-            vmin: 70000,
-            vmax: 350000
-        },
-        {
-            num: "sh601006",
-            nam: "DQ",
-            p: 0,
-            v: 0,
-            min: 7,
-            max: 99,
-            vmin: 220000,
-            vmax: 900000
-        },
-        {
-            num: "sh601088",
-            nam: "ZS",
-            p: 0,
-            v: 0,
-            min: 16,
-            max: 99,
-            vmin: 80000,
-            vmax: 230000
-        },
-        {
-            num: "sh601601",
-            nam: "TB",
-            p: 0,
-            v: 0,
-            min: 26.5,
-            max: 99,
-            vmin: 80000,
-            vmax: 250000
-        }
-    ];
-}
-
-function qry() {
+function qry(d) {
     var ip = "http://hq.sinajs.cn/list=s_";
     var head = document.getElementsByTagName("head")[0];
-    // var d = getDat();
-    var d = window.lzr_optionalStock_dat;
     var ajx;
-    d.unshift(d.length);
     for (var i = 1; i < d.length; i++) {
+        if (d[i].ajx) {
+            head.removeChild(d[i].ajx);
+        }
         ajx = document.createElement("script");
 		ajx.src = ip + d[i].num;
 		ajx.onload = LZR.bind(d[i], hd, d);
+        d[i].ajx = ajx;
 		head.appendChild(ajx);
     }
 }
@@ -102,6 +32,7 @@ function hd(d) {
     }
 }
 
+// 填充表格
 function flush(d) {
     var s;
     var r = "";
@@ -148,4 +79,11 @@ function flush(d) {
         r += s;
     }
     optionalStock.innerHTML = r;
+}
+
+// 刷新
+function refresh() {
+    var d = window.lzr_optionalStock_dat;
+    d[0] = d.length - 1;
+    qry(d);
 }
