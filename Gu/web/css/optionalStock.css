@@ -57,6 +57,7 @@ tr:hover {
 }
 
 .refresh {
+	height: 2rem;
 	cursor: pointer;
 	margin: 2rem;
 	border: 0.2rem solid #000;

@@ -55,6 +55,17 @@ var r = new LZR.Node.Router ({
 
 // 返回 gist 文本信息
 r.get("/gistTxt/:id", function (req, res, next) {
+	// var url = "https://gist.githubusercontent.com/ziniulian/" + req.params.id + "/raw/";
+	// var https= require("https");
+	// https.get(url, function (rrr) {
+	// 	var i = 0;
+	// 	rrr.on("data", function (d) {
+	// 		console.log (i++);
+	// 		console.log (d);
+	// 		// res.send(d);
+	// 	});
+	// });
+	// res.send("ok!");
 	res.send("<script type=\"text/javascript\" src=\"/myLib/LZR.js\"></script><script type=\"text/javascript\" src=\"/js/trace.js\"></script><script type=\"text/javascript\" src=\"https://gist.githubusercontent.com/ziniulian/" + req.params.id + ".js\"></script>");
 });
 
