@@ -22,7 +22,7 @@ function qry(d) {
 
 function hd(d) {
     var y = window["hq_str_s_" + this.num].split(",");
-    console.log (this.nam + " : " + y[0]);
+    console.log (this.alia + " : " + y[0]);
     this.np = y[1] - 0;
     this.nv = y[4] - 0;
     this.pct = y[3] - 0;
@@ -38,7 +38,7 @@ function flush(d) {
     var r = "";
     for (var i = 1; i < d.length; i++) {
         s = "<tr><td class = \"nam\">";
-        s += d[i].nam;
+        s += d[i].alil;
 
         s += "</td><td class = \"gain\">";
         if (d[i].p) {
