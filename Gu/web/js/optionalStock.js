@@ -38,7 +38,7 @@ function flush(d) {
     var r = "";
     for (var i = 1; i < d.length; i++) {
         s = "<tr><td class = \"nam\">";
-        s += d[i].alil;
+        s += d[i].alia;
 
         s += "</td><td class = \"gain\">";
         if (d[i].p) {
