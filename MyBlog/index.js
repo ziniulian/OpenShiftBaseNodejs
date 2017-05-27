@@ -2,14 +2,15 @@ eval("var curPath = " + LZR.getNodejsModelPath.toString() +
 	"('./', 'index.js') + '/';");
 
 // LZR 子模块加载
-// LZR.load([
-// 	"LZR.Node.Db"
-// ]);
+LZR.load([
+	"LZR.Node.Db.Mongo",
+	"LZR.Node.Db.NodeAjax"
+]);
 
 // 数据库
-var mdb = new LZR.Node.Db ({
+var mdb = new LZR.Node.Db.Mongo ({
 	conf: process.env.OPENSHIFT_MONGODB_DB_URL ? process.env.OPENSHIFT_MONGODB_DB_URL : "mongodb://localhost:27017/test",
-	autoErr: true,
+	// autoErr: true,
 	hd_sqls: {
 		srvGetBlog: {
 			db: "test",
@@ -46,6 +47,20 @@ mdb.evt.srvBlogCount.add(function (r, req, res, next) {
 	res.send(r.toString());
 });
 
+// Ajax
+var ajax = new LZR.Node.Db.NodeAjax ({
+	hd_sqls: {
+		gistTxt: "https://gist.githubusercontent.com/ziniulian/<0>/raw/"
+	}
+});
+
+ajax.evt.gistTxt.add(function (r, req, res, next) {
+	req.qpobj = {
+		txt: r
+	};
+	next();
+});
+
 // 创建路由
 var r = new LZR.Node.Router ({
 	path: curPath,
@@ -55,18 +70,7 @@ var r = new LZR.Node.Router ({
 
 // 返回 gist 文本信息
 r.get("/gistTxt/:id", function (req, res, next) {
-	// var url = "https://gist.githubusercontent.com/ziniulian/" + req.params.id + "/raw/";
-	// var https= require("https");
-	// https.get(url, function (rrr) {
-	// 	var i = 0;
-	// 	rrr.on("data", function (d) {
-	// 		console.log (i++);
-	// 		console.log (d);
-	// 		// res.send(d);
-	// 	});
-	// });
-	// res.send("ok!");
-	res.send("<script type=\"text/javascript\" src=\"/myLib/LZR.js\"></script><script type=\"text/javascript\" src=\"/js/trace.js\"></script><script type=\"text/javascript\" src=\"https://gist.githubusercontent.com/ziniulian/" + req.params.id + ".js\"></script>");
+	ajax.qry("gistTxt", req, res, next, [req.params.id]);
 });
 
 // 获取总数
@@ -125,7 +129,7 @@ r.get("/srvGetBlog/:size?/:sort?/:top?/:max?/:min?", function (req, res, next) {
 	mdb.qry("srvGetBlog", req, res, next, [s, sort, size]);
 });
 
-// // 初始化模板
-// r.initTmp();
+// 初始化模板
+r.initTmp();
 
 module.exports = r;

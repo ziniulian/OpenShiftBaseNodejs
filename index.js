@@ -4,7 +4,7 @@ require("LZR");
 // LZR 子模块加载
 LZR.load([
 	"LZR.Node.Srv",
-	"LZR.Node.Db"
+	"LZR.Node.Db.Mongo"
 ]);
 
 // 服务的实例化
@@ -14,7 +14,7 @@ var srv = new LZR.Node.Srv ({
 });
 
 // 数据库
-var mdb = new LZR.Node.Db ({
+var mdb = new LZR.Node.Db.Mongo ({
 	conf: process.env.OPENSHIFT_MONGODB_DB_URL ? process.env.OPENSHIFT_MONGODB_DB_URL : "mongodb://localhost:27017/test",
 	autoErr: true,
 	hd_sqls: {

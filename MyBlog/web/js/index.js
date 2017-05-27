@@ -1,6 +1,7 @@
 LZR.load([
     "LZR.Base.Json",
     "LZR.Base.Data",
+    "LZR.Base.Time",
     "LZR.Base.Val.Ctrl",
     "LZR.HTML.Base.Doe",
 	"LZR.HTML.Base.Ajax",
@@ -27,49 +28,8 @@ var dat = {
 
 var aj = new LZR.HTML.Base.Ajax ();
 var utJson = LZR.getSingleton(LZR.Base.Json);
+var utTim = LZR.getSingleton(LZR.Base.Time);
 var utUrl = LZR.getSingleton(LZR.HTML.Util.Url);
-
-                // 获取日时间戳
-                var to = new Date().getTimezoneOffset() * 60000;
-                var tp = 3600 * 1000 * 24;
-                function getDayTimestamp (d) {
-                    if (!d) {
-                        d = Date.now();
-                    } else if (d.getTime) {
-                        d = d.getTime();
-                    }
-                    return Math.floor((d - to) / tp);
-                }
-
-                // 解析日时间戳
-                function parseDayTimestamp (d) {
-                    return d * tp + to;
-                }
-
-                // 获取时间段的日时间戳
-                function dayAreaStamp (y, m, max) {
-                    if (m) {
-                        if (max) {
-                            if (m == 12) {
-                                y ++;
-                                m = 1;
-                            } else {
-                                m ++;
-                            }
-                        }
-                    } else {
-                        m = 1;
-                        if (max) {
-                            y ++;
-                        }
-                    }
-
-                    var r = getDayTimestamp(Date.parse(y + "/" + m + "/1"));
-                    if (max) {
-                        r --;
-                    }
-                    return r;
-                }
 
 // 生成年目录
 function crtYs (y) {
@@ -107,7 +67,7 @@ function crtMs (doe, dt) {
     var d = new Date();
     var v;
     for (var i = 0; i < dt.length; i++) {
-        d.setTime(parseDayTimestamp(dt[i].tim));
+        d.setTime(utTim.parseDayTimestamp(dt[i].tim));
         var m = d.getMonth() + 1;
 // console.log (m);
         if (m !== mp) {
@@ -206,7 +166,7 @@ dat.y.evt.change.add (function (v, s, o) {
     // 获取数据
     if (v !== 1) {
         if (!d.dat) {
-            var s = "srvGetBlog/400/" + dat.sort + "/0/" + dayAreaStamp(v, 0, 1) + "/" + dayAreaStamp(v);
+            var s = "srvGetBlog/400/" + dat.sort + "/0/" + utTim.dayAreaStamp(v, 0, 1) + "/" + utTim.dayAreaStamp(v);
 // console.log (s);
             d.dat = utJson.toObj(aj.get(s));
 // console.log (dt);
@@ -300,7 +260,7 @@ dat.p.evt.change.add (function (v) {
     for (p; p < n; p++) {
         s = d.dat[p];
         vv = dat.vdm.clone();
-        t.setTime(parseDayTimestamp(s.tim));
+        t.setTime(utTim.parseDayTimestamp(s.tim));
         vv.doe.href = "gistTxt/" + s.gistId;
         vv.doe.target = "_blank";
         vv.getById("tim").doe.innerHTML = t.getFullYear() + "-" + (t.getMonth() + 1) + "-" + t.getDate();
