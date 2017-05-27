@@ -1,0 +1,57 @@
+html, body {
+	padding: 0;
+	margin: 0;
+	font-family: "Microsoft YaHei";
+	font-size: 24px;
+	font-size: 3vw;
+	color: #333;
+	background-color: #FF0;
+}
+
+/*取消a链接默认样式*/
+a{
+	text-decoration:none;
+}
+
+/*字体样式*/
+.comm_ffm {
+    font-family: "Microsoft YaHei";
+}
+
+/*元素消失*/
+.comm_nosee {
+	display: none !important;
+}
+
+/*元素隐藏*/
+.comm_hid {
+	visibility: hidden;
+}
+
+/*文字不被选中*/
+.comm_noselect {
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+	cursor:pointer;
+}
+
+/*大标题*/
+
+/*小标题*/
+
+/*正文*/
+
+/*注释*/
+
+/*按钮*/
+
+/*<pre> 自动换行*/
+.comm_preAutoLine {
+    white-space: pre-wrap; /*css-3*/
+    white-space: -moz-pre-wrap; /*Mozilla,since1999*/
+    white-space: -pre-wrap; /*Opera4-6*/
+    white-space: -o-pre-wrap; /*Opera7*/
+    word-wrap: break-word; /*InternetExplorer5.5+*/
+}

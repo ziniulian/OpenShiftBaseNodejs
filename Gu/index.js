@@ -3,14 +3,11 @@ eval("var curPath = " + LZR.getNodejsModelPath.toString() +
 
 // LZR 子模块加载
 LZR.load([
-	"LZR.Node.Db",
-	"LZR.Base.Json"
+	"LZR.Node.Db.Mongo"
 ]);
 
-var utJson = LZR.getSingleton(LZR.Base.Json);
-
 // 数据库
-var mdb = new LZR.Node.Db ({
+var mdb = new LZR.Node.Db.Mongo ({
 	conf: process.env.OPENSHIFT_MONGODB_DB_URL ? process.env.OPENSHIFT_MONGODB_DB_URL : "mongodb://localhost:27017/test",
 	autoErr: true,
 	hd_sqls: {
@@ -27,7 +24,7 @@ var mdb = new LZR.Node.Db ({
 
 mdb.evt.jsonpOptionalStockDat.add(function (r, req, res, next) {
 	var s = "var lzr_optionalStock_dat=";
-	s += utJson.toJson(r);
+	s += mdb.utJson.toJson(r);
 	s += ";";
 	res.send(s);
 });
