@@ -104,23 +104,33 @@ function init() {
 		},
 		days: [
 			// 须避开双休日
-			new Date ("2017/4/3").valueOf(),
-			new Date ("2017/4/4").valueOf(),
-			new Date ("2017/5/1").valueOf(),
-			new Date ("2017/5/29").valueOf(),
-			new Date ("2017/5/30").valueOf(),
-			new Date ("2017/10/2").valueOf(),
-			new Date ("2017/10/3").valueOf(),
-			new Date ("2017/10/4").valueOf(),
-			new Date ("2017/10/5").valueOf(),
-			new Date ("2017/10/6").valueOf(),
-			new Date ("2018/1/1").valueOf()
-			// new Date ("2018/2/15").valueOf(),
-			// new Date ("2018/2/16").valueOf(),
-			// new Date ("2018/2/19").valueOf(),
-			// new Date ("2018/2/20").valueOf(),
-			// new Date ("2018/2/21").valueOf(),
-			// new Date ("2018/4/5").valueOf()
+			// 元旦	1	1-1
+			Date.parse("2018/1/1"),
+
+			// 春节	3
+			Date.parse("2018/2/15"),
+			Date.parse("2018/2/16"),
+			Date.parse("2018/2/19"),
+
+			// 清明	1	4-5
+			Date.parse("2018/4/5"),
+			Date.parse("2018/4/6"),
+
+			// 劳动	1	5-1
+			Date.parse("2018/4/30"),
+			Date.parse("2018/5/1"),
+
+			// 端午	1
+			Date.parse("2018/6/18"),
+
+			// 中秋	1
+			Date.parse("2017/10/2"),
+
+			// 国庆	3	10-1
+			Date.parse("2017/10/3"),
+			Date.parse("2017/10/4"),
+			Date.parse("2017/10/5"),
+			Date.parse("2017/10/6"),
 		]
 	};
 	var i, s, ajx, r;
@@ -134,9 +144,7 @@ function init() {
 
 	// 时间处理 —— 节假日
 	for (i = 0; i < conf.days.length; i++) {
-		if (st < conf.days[i]) {
-			break;
-		} else if (st === conf.days[i]) {
+		if (st === conf.days[i]) {
 			do {
 				st -= td;
 				t.setTime(st);

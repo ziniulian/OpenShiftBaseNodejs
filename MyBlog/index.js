@@ -1,5 +1,5 @@
-eval("var curPath = " + LZR.getNodejsModelPath.toString() +
-	"('./', 'index.js') + '/';");
+// 文件位置
+var curPath = require.resolve("./index.js").replace("index.js", "");
 
 // LZR 子模块加载
 LZR.load([
