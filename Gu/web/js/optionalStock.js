@@ -9,24 +9,26 @@ function qry(d) {
     var head = document.getElementsByTagName("head")[0];
     var ajx;
     for (var i = 1; i < d.length; i++) {
-        if (d[i].ajx) {
-            head.removeChild(d[i].ajx);
-        }
         ajx = document.createElement("script");
 		ajx.src = ip + d[i].num;
 		ajx.onload = LZR.bind(d[i], hd, d);
-        d[i].ajx = ajx;
 		head.appendChild(ajx);
     }
 }
 
-function hd(d) {
+function hd(d, e) {
+    // 记录数据
     var y = window["hq_str_s_" + this.num].split(",");
-    console.log (this.alia + " : " + y[0]);
     this.np = y[1] - 0;
     this.nv = y[4] - 0;
     this.pct = y[3] - 0;
     d[0] --;
+
+    // 清空 JSONP DOM
+    var ajx = e.target;
+    ajx.parentNode.removeChild(ajx);
+
+    // 刷新页面
     if (d[0] === 0) {
         flush(d);
     }
