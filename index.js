@@ -22,7 +22,7 @@ var mdb = new LZR.Node.Db.Mongo ({
 			db: "test",
 			tnam: "vs",
 			funs: {
-				insert: ['{"tim": <0>, "url": "<1>", "uuid": "<2>"}']
+				insert: [{"tim": "<0>", "url": "<1>", "uuid": "<2>"}]
 			}
 		}
 	}
