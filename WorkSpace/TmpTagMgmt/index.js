@@ -1,3 +1,5 @@
+// 温度标签测试模块
+
 eval("var curPath = " + LZR.getNodejsModelPath.toString() +
 	"('./', 'index.js') + '/';");
 

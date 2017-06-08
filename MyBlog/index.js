@@ -1,3 +1,5 @@
+// 日记模块
+
 // 文件位置
 var curPath = require.resolve("./index.js").replace("index.js", "");
 
@@ -26,7 +28,7 @@ var mdb = new LZR.Node.Db.Mongo ({
 			db: "test",
 			tnam: "blog",
 			funs: {
-				insert: ["<0>"]
+				insertOne: ["<0>"]
 			}
 		},
 		srvBlogCount: {

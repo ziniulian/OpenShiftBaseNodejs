@@ -1,3 +1,5 @@
+// 股票模块
+
 // 文件位置
 var curPath = require.resolve("./index.js").replace("index.js", "");
 

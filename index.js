@@ -22,7 +22,7 @@ var mdb = new LZR.Node.Db.Mongo ({
 			db: "test",
 			tnam: "vs",
 			funs: {
-				insert: [{"tim": "<0>", "url": "<1>", "uuid": "<2>"}]
+				insertOne: [{"tim": "<0>", "url": "<1>", "uuid": "<2>"}]
 			}
 		}
 	}
@@ -56,6 +56,9 @@ srv.ro.get("/srvTrace/:url/:uuid", function (req, res, next) {
 
 // 作品秀
 // srv.use("/Show/", require("./WorkSpace"));
+
+// 分类
+srv.use("/Simi/", require("./Simi"));
 
 // 日记
 srv.use("/Riji/", require("./MyBlog"));
