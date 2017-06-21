@@ -146,7 +146,19 @@ mdb.evt.srvGetLong.add(function (r, req, res, next) {
 
 // 递归获取一个分类，包含其所有子类
 mdb.evt.srvGetAll.add(function (r, req, res, next) {
-	res.json(r);
+	// if (r) {
+	// 	if (req.qpobj.aSimi) {
+	// 		req.qpobj.curSimi.par = r;
+	// 	} else {
+	// 		req.qpobj.aSimi = r;
+	// 		req.qpobj.curSimis = r;
+	// 		mdb.qry("srvGetAll", req, res, next, [{par: r._id, able: true}]);
+	// 	}
+	// } else if (req.qpobj.aSimi) {
+	// 	res.json(req.qpobj.aSimi);
+	// } else {
+	// 	res.send("null");
+	// }
 });
 
 /*
@@ -246,15 +258,11 @@ r.get("/srvGetLong/:id", function (req, res, next) {
 });
 
 // 递归获取一个分类，包含其所有子类
-r.get("/srvGetAll/:id?",function (req, res, next) {
+r.get("/srvGetAll/:id",function (req, res, next) {
 	req.qpobj = {};
 	try {
-		if (req.params.id) {
-			var oid = new mdb.clsOid(req.params.id);
-			mdb.qry("srvGetAll", req, res, next, [{_id: oid, able: true}]);
-		} else {
-			mdb.qry("srvGetAll", req, res, next, [{par: null, able: true}]);
-		}
+		var oid = new mdb.clsOid(req.params.id);
+		mdb.qry("srvGetAll", req, res, next, [{_id: oid, able: true}]);
 	} catch (e) {
 		res.send("null");
 	}
