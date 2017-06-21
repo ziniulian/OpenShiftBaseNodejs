@@ -1,3 +1,5 @@
+// 前期测试模块，及部分作品秀
+
 eval("var curPath = " + LZR.getNodejsModelPath.toString() +
 	"('./', 'index.js') + '/';");
 

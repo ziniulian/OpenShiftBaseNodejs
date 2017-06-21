@@ -1,3 +1,5 @@
+// 日记模块
+
 // 文件位置
 var curPath = require.resolve("./index.js").replace("index.js", "");
 
@@ -26,7 +28,7 @@ var mdb = new LZR.Node.Db.Mongo ({
 			db: "test",
 			tnam: "blog",
 			funs: {
-				insert: ["<0>"]
+				insertOne: ["<0>"]
 			}
 		},
 		srvBlogCount: {
@@ -96,12 +98,11 @@ r.get("/srvSetBlog/:tim/:id/:title?", function (req, res, next) {
 r.get("/srvGetBlog/:size?/:sort?/:top?/:max?/:min?", function (req, res, next) {
 	var size = (req.params.size - 0) || 10;
 	var sort = (req.params.sort - 0);
-	var top = req.params.top;
-	var max = req.params.max;
-	var min = req.params.min;
+	var top = req.params.top ? (req.params.top - 0) : 0;
+	var max = req.params.max ? (req.params.max - 0) : 0;
+	var min = req.params.min ? (req.params.min - 0) : 0;
 	var s;
 	var r = {};
-	if (top == 0) top = undefined;
 	if (sort > 0) {
 		sort = 1;
 		s = top || min;
