@@ -54,20 +54,6 @@ srv.ro.get("/srvTrace/:url/:uuid", function (req, res, next) {
 	res.send("OK");
 });
 
-// // 简单的并发下测试，多个页面来回刷新，证明 nodejs 的确是顺序执行的
-// var t = 0;
-// srv.ro.get("/t/:n", function (req, res, next) {
-// 	for (var i = 0; i < 5; i++) {
-// 		for (var j = 0; j < 1000000000; j++) {}
-// 		t ++;
-// 		console.log (i + "-- " + req.params.n + " -->" + t);
-// 	}
-// 	res.send("OK");
-// });
-
-// 作品秀
-// srv.use("/Show/", require("./WorkSpace"));
-
 // 分类
 srv.use("/Simi/", require("./Simi"));
 
