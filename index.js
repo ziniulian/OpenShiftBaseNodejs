@@ -34,18 +34,6 @@ var mdb = new LZR.Node.Db.Mongo ({
 // 	next();
 // });
 
-// ajax post 测试
-var bodyParser = require('body-parser');
-srv.so.use(bodyParser.urlencoded({ extended: false })); 
-srv.ro.post("/testAjax", function (req, res) {
-	res.set({"Access-Control-Allow-Origin": "*"});
-	if (req.body.username === "ajax" && req.body.password === "test") {
-		res.send("ok");
-	} else {
-		res.send("a ajax res");
-	}
-});
-
 // LZR库文件访问服务
 srv.ro.setStaticDir("/myLib/", LZR.curPath);
 
