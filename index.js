@@ -54,9 +54,6 @@ srv.ro.get("/srvTrace/:url/:uuid", function (req, res, next) {
 	res.send("OK");
 });
 
-// 作品秀
-// srv.use("/Show/", require("./WorkSpace"));
-
 // 分类
 srv.use("/Simi/", require("./Simi"));
 
