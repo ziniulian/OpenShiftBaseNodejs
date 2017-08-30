@@ -17,7 +17,7 @@ dms.initDb (
 
 // 创建路由
 var r = new LZR.Node.Router ({
-	// hd_web: "web",
+	hd_web: "web",
 	path: curPath
 });
 
