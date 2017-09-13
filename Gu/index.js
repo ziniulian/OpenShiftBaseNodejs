@@ -323,14 +323,14 @@ mdb.evt.jsonpOptionalStockDat.add(function (r, req, res, next) {
 
 mdb.evt.get.add(function (r, req, res, next) {
 	switch (req.qpobj.fundTyp) {
-		case "addIds":
+		case "srvAddIds":
 			var a = tools.idFilter(req.qpobj.oids, r);
 			if (a.length) {
 				mdb.qry("add", req, res, next, [a]);
 			}
 			res.json(a);
 			break;
-		case "flushFund":
+		case "srvFlushFund":
 			if (r.length) {
 				req.qpobj.count = r.length;
 				req.qpobj.stock = {};
@@ -362,8 +362,20 @@ r.get("/jsonpOptionalStockDat", function (req, res, next) {
 	mdb.qry("jsonpOptionalStockDat", req, res, next);
 });
 
+// 时间测试
+r.get("/srvTestTim/:tim", function (req, res, next) {
+	var s = req.params.tim;
+	var t = tools.utTim.getTim(s);
+	var d = tools.utTim.getDayTimestamp(t);
+	var to = tools.utTim.to;
+	var pto = tools.utTim.getTim("1970-1-1");
+	var tos = tools.utTim.format(new Date(to));
+	var ptos = tools.utTim.format(new Date(pto));
+	res.send("时间：" + s + "<br>时间戳：" + t + "<br>日时间戳：" + d + "<br>时差：" + to + "<br>时差Str：" + tos + "<br>基准时间戳：" + pto + "<br>基准时间戳Str：" + ptos);
+});
+
 // 页面解析测试
-r.get("/testFund/:id/:typ?", function (req, res, next) {
+r.get("/srvTestFund/:id/:typ?", function (req, res, next) {
 	req.qpobj = {
 		fundTyp: req.params.typ	// 0: 精简的HTML; 2: 解析后的数组; 3: 转换为数据库对象的样子;
 	};
@@ -371,11 +383,11 @@ r.get("/testFund/:id/:typ?", function (req, res, next) {
 });
 
 // 批量导入代码
-r.get("/addIds/:ids", function (req, res, next) {
+r.get("/srvAddIds/:ids", function (req, res, next) {
 	var a = req.params.ids.split(",");
 	req.qpobj = {
 		oids: a,
-		fundTyp: "addIds"
+		fundTyp: "srvAddIds"
 	};
 	// 数据库不进行锁处理
 	mdb.qry("get", req, res, next, [
@@ -384,9 +396,9 @@ r.get("/addIds/:ids", function (req, res, next) {
 });
 
 // 更新基本面信息
-r.get("/flushFund/:ids?", function (req, res, next) {
+r.get("/srvFlushFund/:ids?", function (req, res, next) {
 	req.qpobj = {
-		fundTyp: "flushFund"
+		fundTyp: "srvFlushFund"
 	};
 	if (req.params.ids) {
 		mdb.qry("get", req, res, next, [
@@ -400,8 +412,18 @@ r.get("/flushFund/:ids?", function (req, res, next) {
 	}
 });
 
+
+/********************************************/
+
+// 获取基本面信息
+r.get("/srvGetFund/tim/:ids?", function (req, res, next) {
+	req.qpobj = {
+		fundTyp: "srvGetFund"
+	};
+});
+
 // 更新基本面的参考价
-r.get("/flushFundPrice", function (req, res, next) {
+r.get("/srvFlushFundPrice", function (req, res, next) {
 	// 获取所有现有的代码
 	// 获取所有代码对应的价格
 	// 循环更新数据库中的参考价
