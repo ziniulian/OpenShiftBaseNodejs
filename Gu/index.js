@@ -27,7 +27,7 @@ var tools = {
 
 	// 解析基本面的时间信息
 	parseFundTim: function (s) {
-		return tools.utTim.getDayTimestamp(tools.utTim.getTim(s));
+		return tools.utTim.getDayTimestamp(s + " 0:0");
 	},
 
 	// 解析基本面的数字信息
@@ -365,13 +365,23 @@ r.get("/jsonpOptionalStockDat", function (req, res, next) {
 // 时间测试
 r.get("/srvTestTim/:tim", function (req, res, next) {
 	var s = req.params.tim;
-	var t = tools.utTim.getTim(s);
-	var d = tools.utTim.getDayTimestamp(t);
-	var to = tools.utTim.to;
-	var pto = tools.utTim.getTim("1970-1-1");
-	var tos = tools.utTim.format(new Date(to));
-	var ptos = tools.utTim.format(new Date(pto));
-	res.send("时间：" + s + "<br>时间戳：" + t + "<br>日时间戳：" + d + "<br>时差：" + to + "<br>时差Str：" + tos + "<br>基准时间戳：" + pto + "<br>基准时间戳Str：" + ptos);
+	var r = "时间：" + s;
+	var t = Date.parse(s);
+	r += "<br>解析的时间戳：" + t;
+	var d = newDate(t);
+	r += "<br>时间显示：" + d;
+	r += "<br>时间的时间戳：" + d.valueOf();
+	var dd = d.getTimezoneOffset() * 60000;
+	r += "<br>动态时差：" + dd;
+	var ud = Date.parse("1970-1-1");
+	r += "<br>UTC时差：" + ud;
+	var tp = 3600 * 1000 * 24;
+	var dt = Math.floor((t - dd) / tp);
+	r += "<br>动态日时间戳：" + dt;
+	var ut = Math.floor((t - ud) / tp);
+	r += "<br>UTC日时间戳：" + ut;
+
+	res.send(r);
 });
 
 // 页面解析测试
