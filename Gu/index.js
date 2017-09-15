@@ -27,7 +27,11 @@ var tools = {
 
 	// 解析基本面的时间信息
 	parseFundTim: function (s) {
-		return tools.utTim.getDayTimestamp(s + " 0:0");
+		if (s) {
+			return tools.utTim.getDayTimestamp(s + " 0:0");
+		} else {
+			return null;
+		}
 	},
 
 	// 解析基本面的数字信息
