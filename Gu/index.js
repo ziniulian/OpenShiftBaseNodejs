@@ -368,7 +368,7 @@ r.get("/srvTestTim/:tim", function (req, res, next) {
 	var r = "时间：" + s;
 	var t = Date.parse(s);
 	r += "<br>解析的时间戳：" + t;
-	var d = newDate(t);
+	var d = new Date(t);
 	r += "<br>时间显示：" + d;
 	r += "<br>时间的时间戳：" + d.valueOf();
 	var dd = d.getTimezoneOffset() * 60000;
