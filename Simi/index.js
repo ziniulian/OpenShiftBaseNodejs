@@ -23,7 +23,7 @@ var r = new LZR.Node.Router ({
 
 // 获取整个树结构
 r.get("/srvAll", function (req, res, next) {
-	res.json(dms.root);
+	res.json(dms.getRoot());
 });
 
 // 获取数据

@@ -6,6 +6,7 @@ var curPath = require.resolve("./index.js").replace("index.js", "");
 // LZR 子模块加载
 LZR.load([
 	"LZR.Base.Time",
+	"LZR.Node.Util",
 	"LZR.Node.Db.Mongo",
 	"LZR.Node.Db.NodeAjax"
 ]);
