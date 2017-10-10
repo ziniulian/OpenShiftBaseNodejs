@@ -5,9 +5,14 @@ var curPath = require.resolve("./index.js").replace("index.js", "");
 
 // LZR 子模块加载
 LZR.load([
+	"LZR.Base.Time",
+	"LZR.Node.Util",
 	"LZR.Node.Db.Mongo",
 	"LZR.Node.Db.NodeAjax"
 ]);
+
+var utTim = LZR.getSingleton(LZR.Base.Time);
+var utNode = LZR.getSingleton(LZR.Node.Util);
 
 // 数据库
 var mdb = new LZR.Node.Db.Mongo ({
@@ -36,6 +41,13 @@ var mdb = new LZR.Node.Db.Mongo ({
 			tnam: "blog",
 			funs: {
 				count: []
+			}
+		},
+		srvIpLog: {		// 访问记录
+			db: "test",
+			tnam: "vs",
+			funs: {
+				insertOne: [{"tim": "<0>", "url": "<1>", "ip": "<2>"}]
 			}
 		}
 	}
@@ -72,6 +84,7 @@ var r = new LZR.Node.Router ({
 
 // 返回 gist 文本信息
 r.get("/gistTxt/:id", function (req, res, next) {
+	mdb.qry("srvIpLog", req, res, next, [Date.now(), req.originalUrl, utNode.getClientIp(req)]);	// 记录访问IP
 	ajax.qry("gistTxt", req, res, next, [req.params.id]);
 });
 
@@ -83,15 +96,19 @@ r.get("/srvBlogCount", function (req, res, next) {
 // 插入一笔信息
 r.get("/srvSetBlog/:tim/:id/:title?", function (req, res, next) {
 	var s = {
-		tim: req.params.tim - 0,
+		tim: utTim.getDayTimestamp(req.params.tim + " 0:0"),
 		gistId: req.params.id
 	}
-	var t = req.params.title;
-	if (t) {
-		s.title = t;
+	if (isNaN(s.tim)) {
+		res.send("提交失败，时间格式错误！");
+	} else {
+		var t = req.params.title;
+		if (t) {
+			s.title = t;
+		}
+		mdb.qry("srvSetBlog", req, res, next, [s]);
+		res.send("OK!");
 	}
-	mdb.qry("srvSetBlog", req, res, next, [s]);
-	res.send("OK!");
 });
 
 // 获取信息

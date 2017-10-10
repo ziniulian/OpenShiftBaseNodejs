@@ -1,11 +1,10 @@
 {
 	"name": "OpenShiftBaseNodejs-ziniulian",
 	"version": "1.0.0",
-	"main": "index.js",
+	"main": "indexV3.js",
 	"dependencies": {
 		"express": "4.x",
 		"dot": "1.1.1",
-		"mysql": "2.13.x",
 		"mongodb": "2.2.x",
 		"iconv-lite": "0.4.18"
 	}

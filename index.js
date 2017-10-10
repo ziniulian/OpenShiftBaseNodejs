@@ -3,9 +3,12 @@ require("LZR");
 
 // LZR 子模块加载
 LZR.load([
+	"LZR.Node.Util",
 	"LZR.Node.Srv",
 	"LZR.Node.Db.Mongo"
 ]);
+
+var utNode = LZR.getSingleton(LZR.Node.Util);
 
 // 服务的实例化
 var srv = new LZR.Node.Srv ({
@@ -22,7 +25,14 @@ var mdb = new LZR.Node.Db.Mongo ({
 			db: "test",
 			tnam: "vs",
 			funs: {
-				insertOne: [{"tim": "<0>", "url": "<1>", "uuid": "<2>"}]
+				insertOne: [{"tim": "<0>", "url": "<1>", "ip": "<2>", "uuid": "<3>"}]
+			}
+		},
+		srvIpLog: {		// 访问记录
+			db: "test",
+			tnam: "vs",
+			funs: {
+				insertOne: [{"tim": "<0>", "url": "<1>", "ip": "<2>"}]
 			}
 		}
 	}
@@ -47,10 +57,16 @@ srv.ro.get("/favicon.ico", function (req, res) {
 // 静态主页设置
 srv.ro.setStaticDir("/", "./web");
 
+// 访问记录
+srv.ro.get(/(^\/Riji\/(index.html)?$)/i, function (req, res, next) {
+	mdb.qry("srvIpLog", req, res, next, [Date.now(), req.originalUrl, utNode.getClientIp(req)]);
+	next();
+});
+
 // 网站追踪服务
 srv.ro.get("/srvTrace/:url/:uuid", function (req, res, next) {
 	var u = decodeURIComponent(req.params.url.replace(/_qb_/g, "%"));
-	mdb.qry("srvTrace", req, res, next, [Date.now(), u, req.params.uuid]);
+	mdb.qry("srvTrace", req, res, next, [Date.now(), u, utNode.getClientIp(req), req.params.uuid]);
 	res.send("OK");
 });
 
