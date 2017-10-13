@@ -12,7 +12,7 @@ var utNode = LZR.getSingleton(LZR.Node.Util);
 
 // 服务的实例化
 var srv = new LZR.Node.Srv ({
-	ip: process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1",
+	ip: process.env.OPENSHIFT_NODEJS_IP || "0.0.0.0",
 	port: process.env.OPENSHIFT_NODEJS_PORT || 80
 });
 
