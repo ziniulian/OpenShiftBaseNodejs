@@ -98,7 +98,7 @@ r.get("/srvSetBlog/:tim/:id/:title?", function (req, res, next) {
 	var s = {
 		tim: utTim.getDayTimestamp(req.params.tim + " 0:0"),
 		gistId: req.params.id
-	}
+	};
 	if (isNaN(s.tim)) {
 		res.send("提交失败，时间格式错误！");
 	} else {
@@ -132,7 +132,7 @@ r.get("/srvGetBlog/:size?/:sort?/:top?/:max?/:min?", function (req, res, next) {
 			if (s) {
 				r.tim = {
 					"$gte": s
-				}
+				};
 			}
 		}
 	} else {
@@ -147,7 +147,7 @@ r.get("/srvGetBlog/:size?/:sort?/:top?/:max?/:min?", function (req, res, next) {
 			if (s) {
 				r.tim = {
 					"$lte": s
-				}
+				};
 			}
 		}
 	}
