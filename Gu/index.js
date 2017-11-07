@@ -238,13 +238,14 @@ var tools = {
 var ajax = new LZR.Node.Db.NodeAjax ({
 	enc: "gb2312",
 	hd_sqls: {
-		fundamentals: "http://q.stock.sohu.com/cn/<0>/cwzb.shtml"
+		fundamentals: "http://q.stock.sohu.com/cn/<0>/cwzb.shtml",	// 搜狐基本面消息
+		baiduK: "https://sp0.baidu.com/8aQDcjqpAAV3otqbppnN2DJv/api.php?resource_id=8188&from_mid=1&eprop=<1>&query=<0>"	// 百度K线(minute, fiveday, month, year, dayK, weekK)
 	}
 });
 
 ajax.evt.fundamentals.add(function (r, req, res, next) {
 	var t = tools.pruneFund(r);
-	if (!req.qpobj.fundTyp || req.qpobj.fundTyp == 0) {
+	if (!req.qpobj.fundTyp || req.qpobj.fundTyp === 0) {
 		res.send(t);
 	} else {
 		var a = null;
@@ -274,6 +275,19 @@ ajax.evt.fundamentals.add(function (r, req, res, next) {
 				res.json(req.qpobj.fund);
 			}
 		}
+	}
+});
+
+ajax.evt.baiduK.add(function (r, req, res, next) {
+	var o = mdb.utJson.toObj(r);
+	if (o) {
+		o = o.data[0];
+	}
+	if (o) {
+		o = o.disp_data[0].property[0].data.display.tab.p;
+		res.json(o.split(";"));
+	} else {
+		res.send("[]");
 	}
 });
 
@@ -427,6 +441,7 @@ r.get("/srvFlushFund/:ids?", function (req, res, next) {
 });
 
 
+
 /********************************************/
 
 // 获取基本面信息
@@ -442,6 +457,39 @@ r.get("/srvFlushFundPrice", function (req, res, next) {
 	// 获取所有代码对应的价格
 	// 循环更新数据库中的参考价
 	res.send("null");
+});
+
+
+/********************************************/
+
+// 百度K线
+r.get("/getBaiduK/:typ/:cod", function (req, res, next) {
+	// 解析typ
+	var t;
+	switch (req.params.typ) {
+		case "D":
+			t = "minute";
+			break;
+		case "5":
+			t = "fiveday";
+			break;
+		case "M":
+			t = "month";
+			break;
+		case "Y":
+			t = "year";
+			break;
+		case "K":
+			t = "dayK";
+			break;
+		case "W":
+			t = "weekK";
+			break;
+		default:
+			res.send("[]");
+			return;
+	}
+	ajax.qry("baiduK", req, res, next, [req.params.cod, t]);
 });
 
 // // 初始化模板
