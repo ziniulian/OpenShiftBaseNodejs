@@ -71,13 +71,7 @@ srv.ro.get("/srvTrace/:url/:uuid", function (req, res, next) {
 });
 
 // 分类
-srv.use("/Simi/", require("./Simi"));
-
-// 日记
-srv.use("/Riji/", require("./MyBlog"));
-
-// 股票
-srv.use("/Gu/", require("./Gu"));
+// srv.use("/Simi/", require("./Simi"));
 
 // 收尾处理
 srv.use("*", function (req, res) {
