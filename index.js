@@ -5,44 +5,23 @@ require("LZR");
 LZR.load([
 	"LZR.Node.Util",
 	"LZR.Node.Srv",
-	"LZR.Node.Db.Mongo"
+	"LZR.Node.Db.NodeAjax"
 ]);
 
 var utNode = LZR.getSingleton(LZR.Node.Util);
+
+// Ajax
+var ajax = new LZR.Node.Db.NodeAjax ({
+	hd_sqls: {
+		vs: "http://127.0.0.1/Vs/srvTrace/<0>/0/<1>"
+	}
+});
 
 // 服务的实例化
 var srv = new LZR.Node.Srv ({
 	ip: process.env.OPENSHIFT_NODEJS_IP || "0.0.0.0",
 	port: process.env.OPENSHIFT_NODEJS_PORT || 80
 });
-
-// 数据库
-var mdb = new LZR.Node.Db.Mongo ({
-	conf: process.env.OPENSHIFT_MONGODB_DB_URL ? process.env.OPENSHIFT_MONGODB_DB_URL : "mongodb://localhost:27017/test",
-	autoErr: true,
-	hd_sqls: {
-		srvTrace: {
-			db: "test",
-			tnam: "vs",
-			funs: {
-				insertOne: [{"tim": "<0>", "url": "<1>", "ip": "<2>", "uuid": "<3>"}]
-			}
-		},
-		srvIpLog: {		// 访问记录
-			db: "test",
-			tnam: "vs",
-			funs: {
-				insertOne: [{"tim": "<0>", "url": "<1>", "ip": "<2>"}]
-			}
-		}
-	}
-});
-
-// // 设置 Ajax 跨域权限
-// srv.use("*", function (req, res, next) {
-// 	res.set({"Access-Control-Allow-Origin": "*"});
-// 	next();
-// });
 
 // LZR库文件访问服务
 srv.ro.setStaticDir("/myLib/", LZR.curPath);
@@ -54,24 +33,20 @@ srv.ro.get("/favicon.ico", function (req, res) {
 	});
 });
 
-// 静态主页设置
-srv.ro.setStaticDir("/", "./web");
-
 // 访问记录
-srv.ro.get(/(^\/Riji\/(index.html)?$)/i, function (req, res, next) {
-	mdb.qry("srvIpLog", req, res, next, [Date.now(), req.originalUrl, utNode.getClientIp(req)]);
+srv.ro.get(/(^\/(flawerShop\/)?(index.html)?$)/i, function (req, res, next) {
+	ajax.qry("vs", req, res, next, [encodeURIComponent(req.protocol + "://" + req.hostname + req.originalUrl), utNode.getClientIp(req)]);
 	next();
 });
 
-// 网站追踪服务
-srv.ro.get("/srvTrace/:url/:uuid", function (req, res, next) {
-	var u = decodeURIComponent(req.params.url.replace(/_qb_/g, "%"));
-	mdb.qry("srvTrace", req, res, next, [Date.now(), u, utNode.getClientIp(req), req.params.uuid]);
-	res.send("OK");
-});
+// 静态主页设置
+srv.ro.setStaticDir("/", "./web");
 
-// 分类
-// srv.use("/Simi/", require("./Simi"));
+// 访问统计
+srv.use("/Vs/", require("./Vs"));
+
+// 访问统计
+srv.use("/Tim/", require("./Tim"));
 
 // 收尾处理
 srv.use("*", function (req, res) {
@@ -82,3 +57,4 @@ srv.use("*", function (req, res) {
 
 // 服务启动
 srv.start();
+console.log("LZRmain start " + srv.ip + ":" + srv.port);

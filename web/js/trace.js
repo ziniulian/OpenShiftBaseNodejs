@@ -5,9 +5,9 @@ function trace () {
     ]);
 
     var aj = new LZR.HTML.Base.Ajax ();
-    var url = encodeURIComponent(window.location.pathname).replace(/%/g, "_qb_");
+    var url = encodeURIComponent(window.location.href);
     var uuid = LZR.getSingleton(LZR.HTML.Util.Finger).uuid;
-    aj.get (("/srvTrace/" + url + "/" + uuid), true);
+    aj.get (("/Vs/srvTrace/" + url + "/" + uuid), true);
 }
 
 trace();
