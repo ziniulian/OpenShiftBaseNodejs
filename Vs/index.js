@@ -52,6 +52,10 @@ var mdb = new LZR.Node.Db.Mongo ({
 	}
 });
 
+mdb.evt.srvTrace.add(function (r, req, res, next) {
+	res.send(r);
+});
+
 // 创建路由
 var r = new LZR.Node.Router ({
 	// hd_web: "web",
@@ -66,7 +70,6 @@ r.get("/srvTrace/:url/:uuid?/:ip?", function (req, res, next) {
 	var id = req.params.uuid || 0;
 console.log(ip);	// 暂不考虑ip的URI编码
 	mdb.qry("srvTrace", req, res, next, [Date.now(), u, ip, id]);
-	res.send("OK");
 });
 
 // // 初始化模板
