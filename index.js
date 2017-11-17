@@ -33,17 +33,17 @@ srv.ro.get("/favicon.ico", function (req, res) {
 	});
 });
 
-// // 访问记录
-// srv.ro.get(/(^\/(flawerShop\/)?(index.html)?$)/i, function (req, res, next) {
-// 	ajax.qry("vs", req, res, next, [encodeURIComponent(req.protocol + "://" + req.hostname + req.originalUrl), utNode.getClientIp(req)]);
-// 	next();
-// });
+// 访问记录
+srv.ro.get(/(^\/(flawerShop\/)?(index.html)?$)/i, function (req, res, next) {
+	ajax.qry("vs", req, res, next, [encodeURIComponent(req.protocol + "://" + req.hostname + req.originalUrl), utNode.getClientIp(req)]);
+	next();
+});
 
 // 静态主页设置
 srv.ro.setStaticDir("/", "./web");
 
-// // 访问统计
-// srv.use("/Vs/", require("./Vs"));
+// 访问统计
+srv.use("/Vs/", require("./Vs"));
 
 // 访问统计
 srv.use("/Tim/", require("./Tim"));
