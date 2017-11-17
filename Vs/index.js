@@ -10,6 +10,7 @@ LZR.load([
 
 var utNode = LZR.getSingleton(LZR.Node.Util);
 
+// // 根据 openshift 参数获取 mongodb 连接字
 // var getMongoURL = function () {
 // 	var mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL;
 //
@@ -69,7 +70,7 @@ r.get("/srvTrace/:url/:uuid?/:ip?", function (req, res, next) {
 	var u = decodeURIComponent(req.params.url);
 	var ip = req.params.ip || utNode.getClientIp(req);
 	var id = req.params.uuid || 0;
-console.log(ip);	// 暂不考虑ip的URI编码
+// console.log(ip);	// 暂不考虑ip的URI编码
 	mdb.qry("srvTrace", req, res, next, [Date.now(), u, ip, id]);
 });
 

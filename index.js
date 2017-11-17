@@ -13,7 +13,7 @@ var utNode = LZR.getSingleton(LZR.Node.Util);
 // Ajax
 var ajax = new LZR.Node.Db.NodeAjax ({
 	hd_sqls: {
-		vs: "http://127.0.0.1/Vs/srvTrace/<0>/0/<1>"
+		vs: "http://srv-lzrmain.193b.starter-ca-central-1.openshiftapps.com/Vs/srvTrace/<0>/0/<1>"
 	}
 });
 
