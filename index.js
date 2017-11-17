@@ -1,5 +1,5 @@
 // LZR 模块加载
-require("LZR");
+require("lzr");
 
 // LZR 子模块加载
 LZR.load([
