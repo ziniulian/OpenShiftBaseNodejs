@@ -5,15 +5,17 @@ require("lzr");
 LZR.load([
 	"LZR.Node.Util",
 	"LZR.Node.Srv",
-	"LZR.Node.Db.NodeAjax"
+	"LZR.Node.Db.NodeAjax",
+	"LZR.Node.Srv.DomainSrv"
 ]);
 
 var utNode = LZR.getSingleton(LZR.Node.Util);
+var utDma = LZR.getSingleton(LZR.Node.Srv.DomainSrv);
 
 // Ajax
 var ajax = new LZR.Node.Db.NodeAjax ({
 	hd_sqls: {
-		vs: "http://srv-lzrmain.193b.starter-ca-central-1.openshiftapps.com/Vs/srvTrace/<0>/0/<1>"
+		vs: utDma.get() + "/Vs/srvTrace/<0>/0/<1>"
 	}
 });
 
