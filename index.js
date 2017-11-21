@@ -47,7 +47,10 @@ srv.ro.setStaticDir("/", "./web");
 // 访问统计
 srv.use("/Vs/", require("./Vs"));
 
-// 访问统计
+// 域名服务
+srv.use("/Domain/", require("./Domain"));
+
+// 时间服务
 srv.use("/Tim/", require("./Tim"));
 
 // 收尾处理
