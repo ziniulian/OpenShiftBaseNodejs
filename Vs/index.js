@@ -9,7 +9,7 @@ LZR.load([
 	"LZR.Node.Srv.Result"
 ]);
 
-var clsR = LZR.Node.Srv.Result,
+var clsR = LZR.Node.Srv.Result;
 var utNode = LZR.getSingleton(LZR.Node.Util);
 
 // // 根据 openshift 参数获取 mongodb 连接字

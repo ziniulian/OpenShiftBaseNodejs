@@ -8,7 +8,7 @@ var utDma = LZR.getSingleton(LZR.Node.Srv.DomainSrv);
 LZR.load([
 	"LZR.Node.Srv.Result"
 ]);
-var clsR = LZR.Node.Srv.Result,
+var clsR = LZR.Node.Srv.Result;
 
 // 创建路由
 var r = new LZR.Node.Router ({

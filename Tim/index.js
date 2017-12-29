@@ -7,7 +7,7 @@ var curPath = require.resolve("./index.js").replace("index.js", "");
 LZR.load([
 	"LZR.Node.Srv.Result"
 ]);
-var clsR = LZR.Node.Srv.Result,
+var clsR = LZR.Node.Srv.Result;
 
 // 创建路由
 var r = new LZR.Node.Router ({
