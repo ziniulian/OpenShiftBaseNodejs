@@ -5,9 +5,11 @@ var curPath = require.resolve("./index.js").replace("index.js", "");
 
 // LZR 子模块加载
 LZR.load([
-	"LZR.Node.Db.Mongo"
+	"LZR.Node.Db.Mongo",
+	"LZR.Node.Srv.Result"
 ]);
 
+var clsR = LZR.Node.Srv.Result,
 var utNode = LZR.getSingleton(LZR.Node.Util);
 
 // // 根据 openshift 参数获取 mongodb 连接字
@@ -55,7 +57,7 @@ var mdb = new LZR.Node.Db.Mongo ({
 });
 
 mdb.evt.srvTrace.add(function (r, req, res, next) {
-	res.send(r);
+	res.json(clsR.get( r, "", r.ok ));
 });
 
 // 创建路由
