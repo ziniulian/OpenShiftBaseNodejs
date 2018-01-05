@@ -6,16 +6,20 @@ LZR.load([
 	"LZR.Node.Util",
 	"LZR.Node.Srv",
 	"LZR.Node.Db.NodeAjax",
-	"LZR.Node.Srv.DomainSrv"
+	"LZR.HTML"
 ]);
 
 var utNode = LZR.getSingleton(LZR.Node.Util);
-var utDma = LZR.getSingleton(LZR.Node.Srv.DomainSrv);
+var dmsrv = {
+	main: LZR.HTML.domain,
+	vs: LZR.HTML.domain + "/Vs"
+	// vs: "/Vs"
+};
 
 // Ajax
 var ajax = new LZR.Node.Db.NodeAjax ({
 	hd_sqls: {
-		vs: utDma.get() + "/Vs/srvTrace/<0>/0/<1>"
+		vs: dmsrv.vs + "/srvTrace/<0>/0/<1>"
 	}
 });
 
