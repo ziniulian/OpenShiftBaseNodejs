@@ -52,28 +52,51 @@ var mdb = new LZR.Node.Db.Mongo ({
 			funs: {
 				insertOne: [{"tim": "<0>", "url": "<1>", "ip": "<2>", "uuid": "<3>"}]
 			}
+		},
+
+		qry: {
+			tnam: "domain",
+			funs: {
+				find: ["<0>", {"_id":0}],
+				sort: [{"tim": -1}],
+				limit: ["<1>"],
+				toArray: []
+			}
+		},
+
+		del: {
+			tnam: "domain",
+			funs: {
+				removeMany: ["<0>"]
+			}
 		}
 	}
 });
 
-mdb.evt.srvTrace.add(function (r, req, res, next) {
-	res.json(clsR.get( r, "", r.ok ));
+mdb.evt.qry.add(function (r, req, res, next) {
+	if (r.length) {
+		res.json(clsR.get(r));
+	} else {
+		res.json(clsR.get(null, "暂无数据"));
+	}
 });
 
 // 创建路由
 var r = new LZR.Node.Router ({
-	// hd_web: "web",
+	hd_web: "web",
 	path: curPath
 });
 
 // 网站追踪服务
 r.get("/srvTrace/:url/:uuid?/:ip?", function (req, res, next) {
 	res.set({"Access-Control-Allow-Origin": "*"});	// 跨域
-	var u = decodeURIComponent(req.params.url);
+	// var u = decodeURIComponent(req.params.url);
+	var u = req.params.url;
 	var ip = req.params.ip || utNode.getClientIp(req);
 	var id = req.params.uuid || 0;
 // console.log(ip);	// 暂不考虑ip的URI编码
 	mdb.qry("srvTrace", req, res, next, [Date.now(), u, ip, id]);
+	res.json(clsR.get("无返回的OK"));
 });
 
 // // 初始化模板

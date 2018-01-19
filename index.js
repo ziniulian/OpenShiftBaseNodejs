@@ -12,8 +12,8 @@ LZR.load([
 var utNode = LZR.getSingleton(LZR.Node.Util);
 var dmsrv = {
 	main: LZR.HTML.domain,
-	vs: LZR.HTML.domain + "/Vs"
-	// vs: "/Vs"
+	// vs: LZR.HTML.domain + "/Vs"
+	vs: "/Vs"
 };
 
 // Ajax
@@ -43,6 +43,16 @@ srv.ro.get("/favicon.ico", function (req, res) {
 srv.ro.get(/(^\/(flawerShop\/)?(index.html)?$)/i, function (req, res, next) {
 	ajax.qry("vs", req, res, next, [encodeURIComponent(req.protocol + "://" + req.hostname + req.originalUrl), utNode.getClientIp(req)]);
 	next();
+});
+
+// 公共样式
+srv.ro.get("/base.css", function (req, res) {
+	res.redirect("/css/common/base.css");
+});
+
+// 追踪器
+srv.ro.get("/trace.js", function (req, res) {
+	res.redirect("/js/trace.js");
 });
 
 // 静态主页设置

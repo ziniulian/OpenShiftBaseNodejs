@@ -148,7 +148,7 @@ r.get("/srvQry/:size/:start?/:idLike?/:urlLike?", function (req, res, next) {
 	var d = req.params.idLike;
 	var u = req.params.urlLike;
 	var q = {};
-	if (s && s !== "null") {
+	if (s && s !== "null" && s !== "nullC") {
 		q.id = {"$gte": s};
 	}
 	if (d && d !== "null") {
@@ -159,14 +159,14 @@ r.get("/srvQry/:size/:start?/:idLike?/:urlLike?", function (req, res, next) {
 		}
 	}
 	if (u) {
+		// q.url = {"$regex": new RegExp(decodeURIComponent(u))};
 		q.url = {"$regex": new RegExp(u)};
 	}
-	mdb.qry("qry", req, res, next, [q, n]);
-});
-
-// 获取域名总数
-r.get("/srvCount", function (req, res, next) {
-	mdb.qry("count", req, res, next, [{}]);
+	if (s === "nullC") {
+		mdb.qry("count", req, res, next, [q]);
+	} else {
+		mdb.qry("qry", req, res, next, [q, n]);
+	}
 });
 
 // 添加域名
@@ -175,7 +175,8 @@ r.get("/srvAdd/:id/:url", function (req, res, next) {
 		qryTyp: "srvAdd",
 		o: {
 			id: req.params.id,
-			url: decodeURIComponent(req.params.url)
+			// url: decodeURIComponent(req.params.url)
+			url: req.params.url
 		}
 	};
 	mdb.qry("get", req, res, next, [{"id":req.params.id}]);
@@ -195,7 +196,8 @@ r.get("/srvSet/:id/:url", function (req, res, next) {
 	req.qpobj = {
 		qryTyp: "srvSet",
 		id: req.params.id,
-		url: decodeURIComponent(req.params.url)
+		// url: decodeURIComponent(req.params.url)
+		url: req.params.url
 	};
 	mdb.qry("get", req, res, next, [{"id":req.params.id}]);
 });

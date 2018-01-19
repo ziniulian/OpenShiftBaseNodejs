@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0" />
 		<meta charset="utf-8" />
 		<script type="text/javascript" src="/myLib/LZR.js"></script>
-		<script type="text/javascript" src="js/index.js"></script>
+		<script type="text/javascript" src="js/index1.js"></script>
 		<link rel="stylesheet" href="/base.css">
 
 		<style type="text/css">
@@ -18,6 +18,9 @@
 			input {
 				width: 100%;
 			}
+			.set {
+				line-height: 2.2;
+			}
 		</style>
 	</head>
 
@@ -28,12 +31,17 @@
 				<table>
 					<tbody>
 						<tr>
-							<td width="25%">
+							<td width="30%" class="c">
+								<!-- <input id="keyDom" type="text" placeholder="键查询" onfocus="this.select();" onmouseup="this.select();"></input>	// 兼容IE的焦点全选方法 -->
 								<input id="keyDom" type="text" placeholder="ID查询" onfocus="this.select();"></input>
 							</td>
-							<td width="1.5%"/>
-							<td>
+							<td width="1%"/>
+							<td width="40%">
 								<input id="vDom" type="text" placeholder="URL查询" onfocus="this.select();"></input>
+							</td>
+							<td width="1%"/>
+							<td width="10%">
+								<a href="javascript: dat.clear();">重置</a>
 							</td>
 						</tr>
 					</tbody>
@@ -49,8 +57,9 @@
 				<table>
 					<tbody>
 						<tr>
+							<th width="10%" />
 							<th width="25%">ID</th>
-							<th width="60%">URL</th>
+							<th width="50%">URL</th>
 							<th width="15%" />
 						</tr>
 					</tbody>
@@ -62,16 +71,17 @@
 				<table>
 					<tbody>
 						<tr>
+							<td width="10%" class="c">
+								<a href="javascript: dat.add();">添加</a>
+							</td>
 							<td width="24%">
 								<input id="idDom" type="text" placeholder="请输入ID" onfocus="this.select();"></input>
 							</td>
 							<td width="1%"/>
-							<td width="60%">
+							<td width="64%">
 								<input id="urlDom" type="text" placeholder="请输入URL" onfocus="this.select();"></input>
 							</td>
-							<td width="15%" class="c">
-								<a href="javascript: dat.clear();">重置</a>
-							</td>
+							<td width="1%"/>
 						</tr>
 					</tbody>
 				</table>

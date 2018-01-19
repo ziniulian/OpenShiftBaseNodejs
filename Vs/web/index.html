@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>访问管理</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0" />
+		<meta charset="utf-8" />
+		<script type="text/javascript" src="/myLib/LZR.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
+		<link rel="stylesheet" href="/base.css">
+
+		<style type="text/css">
+			tr {
+				text-align: left;
+			}
+			td {
+				word-break:break-all;
+			}
+			input {
+				width: 100%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="boso" class="boso">
+			<div class="logo">
+				<a class="logohome" target="_blank" href="/"></a>
+			</div>
+			<div>
+				<table>
+					<tbody id="tbs"></tbody>
+				</table>
+			</div>
+			<div class="c">
+				<a id="preDom" href="javascript: dat.prePage();">上一页</a>
+				&nbsp;&nbsp;&nbsp;
+				<a id="nextDom" href="javascript: dat.nextPage();">下一页</a>
+			</div>
+			<div id="mark" class="Lc_nosee"><br /><br />请稍候 ...<br /><br /><a href="javascript: dat.doMark(false);">取消</a></div>
+		</div>
+	</body>
+
+	<script type="text/javascript">
+		document.body.onload = init;
+	</script>
+</html>
