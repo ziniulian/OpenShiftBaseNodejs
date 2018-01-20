@@ -148,7 +148,7 @@ r.get("/srvQry/:size/:start?/:idLike?/:urlLike?", function (req, res, next) {
 	var d = req.params.idLike;
 	var u = req.params.urlLike;
 	var q = {};
-	if (s && s !== "null" && s !== "nullC") {
+	if (s && s !== "null") {
 		q.id = {"$gte": s};
 	}
 	if (d && d !== "null") {
@@ -162,7 +162,7 @@ r.get("/srvQry/:size/:start?/:idLike?/:urlLike?", function (req, res, next) {
 		// q.url = {"$regex": new RegExp(decodeURIComponent(u))};
 		q.url = {"$regex": new RegExp(u)};
 	}
-	if (s === "nullC") {
+	if (n < 0) {
 		mdb.qry("count", req, res, next, [q]);
 	} else {
 		mdb.qry("qry", req, res, next, [q, n]);

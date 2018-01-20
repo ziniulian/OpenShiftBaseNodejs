@@ -12,38 +12,8 @@ LZR.load([
 var clsR = LZR.Node.Srv.Result;
 var utNode = LZR.getSingleton(LZR.Node.Util);
 
-// // 根据 openshift 参数获取 mongodb 连接字
-// var getMongoURL = function () {
-// 	var mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL;
-//
-// 	if (!mongoURL && process.env.DATABASE_SERVICE_NAME) {
-// 		var mongoServiceName = process.env.DATABASE_SERVICE_NAME.toUpperCase(),
-// 		mongoHost = process.env[mongoServiceName + '_SERVICE_HOST'],
-// 		mongoPort = process.env[mongoServiceName + '_SERVICE_PORT'],
-// 		mongoDatabase = process.env[mongoServiceName + '_DATABASE'],
-// 		mongoPassword = process.env[mongoServiceName + '_PASSWORD']
-// 		mongoUser = process.env[mongoServiceName + '_USER'];
-//
-// 		if (mongoHost && mongoPort && mongoDatabase) {
-// 			mongoURL = 'mongodb://';
-// 			if (mongoUser && mongoPassword) {
-// 				mongoURL += mongoUser + ':' + mongoPassword + '@';
-// 			}
-// 			// Provide UI label that excludes user id and pw
-// 			mongoURL += mongoHost + ':' + mongoPort + '/' + mongoDatabase;
-// 		}
-// 	}
-//
-// 	if (mongoURL) {
-// 		return mongoURL;
-// 	} else {
-// 		return "mongodb://localhost:27017/test";
-// 	}
-// }
-
 // 数据库
 var mdb = new LZR.Node.Db.Mongo ({
-	// conf: getMongoURL(),
 	conf: process.env.OPENSHIFT_MONGODB_DB_URL || "mongodb://localhost:27017/test",
 	autoErr: true,
 	hd_sqls: {
@@ -55,7 +25,7 @@ var mdb = new LZR.Node.Db.Mongo ({
 		},
 
 		qry: {
-			tnam: "domain",
+			tnam: "vs",
 			funs: {
 				find: ["<0>", {"_id":0}],
 				sort: [{"tim": -1}],
@@ -64,8 +34,15 @@ var mdb = new LZR.Node.Db.Mongo ({
 			}
 		},
 
+		count: {
+			tnam: "vs",
+			funs: {
+				count: ["<0>"]
+			}
+		},
+
 		del: {
-			tnam: "domain",
+			tnam: "vs",
 			funs: {
 				removeMany: ["<0>"]
 			}
@@ -81,6 +58,14 @@ mdb.evt.qry.add(function (r, req, res, next) {
 	}
 });
 
+mdb.evt.count.add(function (r, req, res, next) {
+	if (r === 0) {
+		res.json(clsR.get(r, "", true));
+	} else {
+		res.json(clsR.get(r));
+	}
+});
+
 // 创建路由
 var r = new LZR.Node.Router ({
 	hd_web: "web",
@@ -93,13 +78,40 @@ r.get("/srvTrace/:url/:uuid?/:ip?", function (req, res, next) {
 	// var u = decodeURIComponent(req.params.url);
 	var u = req.params.url;
 	var ip = req.params.ip || utNode.getClientIp(req);
-	var id = req.params.uuid || 0;
+	var id = req.params.uuid || "0";
 // console.log(ip);	// 暂不考虑ip的URI编码
 	mdb.qry("srvTrace", req, res, next, [Date.now(), u, ip, id]);
 	res.json(clsR.get("无返回的OK"));
 });
 
-// // 初始化模板
-// r.initTmp();
+// 查询
+r.get("/srvQry/:size/:stim/:etim/:uuid?/:ip?/:url?", function (req, res, next) {
+	var n = (req.params.size - 0) || 10;
+	var s = (req.params.stim - 0) || 1;
+	var e = (req.params.etim - 0) || Date.now();
+	var d = req.params.uuid;
+	var p = req.params.ip;
+	var u = req.params.url;
+	var q = {
+		tim: {
+			"$gte": s,
+			"$lte": e
+		}
+	};
+	if (d && d !== "null") {
+		q.uuid = {"$in": d.split(",")};
+	}
+	if (p && p !== "null") {
+		q.ip = {"$in": p.split(",")};
+	}
+	if (u) {
+		q.url = {"$regex": new RegExp(u)};
+	}
+	if (n < 0) {
+		mdb.qry("count", req, res, next, [q]);
+	} else {
+		mdb.qry("qry", req, res, next, [q, n]);
+	}
+});
 
 module.exports = r;
