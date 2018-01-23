@@ -25,9 +25,67 @@
 		<div id="boso" class="boso">
 			<div class="logo">
 				<a class="logohome" target="_blank" href="/"></a>
+				<a href="javascript: dat.qry(-2);">--删除--</a>
 			</div>
 			<div>
 				<table>
+					<tbody>
+						<tr>
+							<td width="24%" class="c">
+								<input id="idDom" type="text" placeholder="ID查询" onfocus="this.select();"></input>
+							</td>
+							<td width="1%" />
+							<td width="49%">
+								<input id="urlDom" type="text" placeholder="URL查询" onfocus="this.select();"></input>
+							</td>
+							<td width="1%" />
+							<td width="17%">
+								<input id="ipDom" type="text" placeholder="IP查询" onfocus="this.select();"></input>
+							</td>
+							<td width="8%">
+								<a href="javascript: dat.clear();">重置</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<table>
+					<tbody>
+						<tr>
+							<td width="20%">
+								<input id="stimDom" type="date" onchange="dat.reflush();"></input>
+							</td>
+							<td width="1%" />
+							<td width="20%">
+								<input id="etimDom" type="date" onchange="dat.reflush();"></input>
+							</td>
+							<td width="1%" />
+							<td width="58%">
+								<select id="cycDom" onchange="dat.chgTim();">
+									<option value="all">全部</option>
+									<option selected=true value="now">当天</option>
+									<option value="d3">近三天</option>
+									<option value="w1">近一周</option>
+									<option value="m1">近一月</option>
+									<option value="m3">近三月</option>
+									<option value="m6">近半年</option>
+									<option value="y1">近一年</option>
+								</select>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<hr />
+			<div>
+				<table>
+					<tbody>
+						<tr>
+							<th width="25%">时间</th>
+							<th width="50%">URL</th>
+							<th width="17%">IP</th>
+							<th width="8%">ID</th>
+						</tr>
+					</tbody>
 					<tbody id="tbs"></tbody>
 				</table>
 			</div>
