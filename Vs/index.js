@@ -8,7 +8,6 @@ LZR.load([
 	"LZR.HTML",
 	"LZR.Node.Util",
 	"LZR.Node.Db.NodeAjax",
-	"LZR.Node.Srv.DomainSrv",
 	"LZR.Node.Db.Mongo",
 	"LZR.Node.Srv.Result"
 ]);
@@ -16,17 +15,11 @@ LZR.load([
 var clsR = LZR.Node.Srv.Result;
 var utNode = LZR.getSingleton(LZR.Node.Util);
 
-var ajax;
-var dmsrv = new LZR.Node.Srv.DomainSrv ({	// 域名服务
-	hd_ids: "domain,vs",
-	hd_fun: function (r) {
-		// Ajax
-		ajax = new LZR.Node.Db.NodeAjax ({
-			hd_sqls: {
-				// vs: "/Vs/srvTrace/<0>/0/<1>"	// 测试用
-				vs: dmsrv.ds.vs + "srvTrace/<0>/0/<1>"
-			}
-		});
+// Ajax，不使用域名服务的精简方式
+var ajax = new LZR.Node.Db.NodeAjax ({
+	hd_sqls: {
+		// vs: "/Vs/srvTrace/<0>/0/<1>"	// 测试用
+		vs: LZR.HTML.domain + "Vs/srvTrace/<0>/0/<1>"
 	}
 });
 
