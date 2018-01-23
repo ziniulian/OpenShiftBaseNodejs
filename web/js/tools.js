@@ -1,43 +1,43 @@
 // 通用工具
-
 LZR.load([
+	"LZR.Base.Json",
 	"LZR.HTML.Base.Ajax",
+	"LZR.HTML.Util.DomTool",
     "LZR.HTML.Util.Finger"
 ]);
 
 var lzr_tools = {
-	urls: {
+	domains: {
 		main: LZR.HTML.domain
 	},
+	utDomTool: LZR.getSingleton(LZR.HTML.Util.DomTool),
+	utJson: LZR.getSingleton(LZR.Base.Json),
 
-	getUrl: function (ids, cb) {
+	getDomains: function (ids, cb) {
 		if (ids) {
 			var url = LZR.HTML.domain + "Domain/srvGet/" + ids;
 			var ajx = new LZR.HTML.Base.Ajax ();
-			ajx.evt.rsp.add(LZR.bind(ajx, lzr_domain.hdUrl, cb));
+			ajx.evt.rsp.add(LZR.bind(ajx, lzr_tools.hdDomains, cb));
 			ajx.get(url, true);
 		} else if (cb) {
-			cb(lzr_domain.urls);
+			cb(lzr_tools.domains);
 		}
 	},
 
-	hdUrl: function (cb, txt, sta) {
+	hdDomains: function (cb, txt, sta) {
 		if (sta === 200) {
-			var d = this.utJson.toObj(txt);
+			var d = lzr_tools.utJson.toObj(txt);
 			if (d.ok) {
 				d.dat.main = LZR.HTML.domain;
-				lzr_domain.urls = d.dat;
+				lzr_tools.domains = d.dat;
 				var s, o;
 				for (s in d.dat) {
-					o = document.getElementById("dmad_" + s);
-					if (o) {
-						o.href = d.dat[s];
-					}
+					lzr_tools.utDomTool.setProByNam("dmad_" + s, "href", d.dat[s]);
 				}
 			}
 		}
 		if (cb) {
-			cb(lzr_domain.urls);
+			cb(lzr_tools.domains);
 		}
 	},
 

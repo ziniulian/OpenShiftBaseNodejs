@@ -3,15 +3,17 @@
 LZR.load([
 	"LZR.Base.Json",
 	"LZR.HTML.Base.Ajax",
+	"LZR.HTML.Util.DomTool",
 	"LZR.Base.Time"
 ]);
 
 var ajx = new LZR.HTML.Base.Ajax ();
 var utJson = LZR.getSingleton(LZR.Base.Json);
 var utTim = LZR.getSingleton(LZR.Base.Time);
+var utDomTool = LZR.getSingleton(LZR.HTML.Util.DomTool);
 var dat = {
 	busy: false,
-	pgs: 7,			// 分页个数
+	pgs: 10,			// 分页个数
 	pgd: null,		// 分页位置
 	pg: 0,			// 当前页数
 
@@ -79,16 +81,16 @@ var dat = {
 				if (o.length > dat.pgs) {
 					n = dat.pgs;
 					dat.pgd[dat.pg + 1] = o[dat.pgs].tim;
-					nextDom.className = "";
+					utDomTool.setProByNam("nextDom", "className", "");
 				} else {
 					n = o.length;
-					nextDom.className = "Lc_hid";
+					utDomTool.setProByNam("nextDom", "className", "Lc_hid");
 				}
 				if (dat.pg) {
 					dat.pgd[dat.pg] = o[0].tim;
-					preDom.className = "";
+					utDomTool.setProByNam("preDom", "className", "");
 				} else {
-					preDom.className = "Lc_hid";
+					utDomTool.setProByNam("preDom", "className", "Lc_hid");
 				}
 				for (i = 0; i < n; i ++) {
 					dat.show(o[i]);
@@ -98,8 +100,8 @@ var dat = {
 				dat.prePage();
 				return;
 			} else {
-				nextDom.className = "Lc_hid";
-				preDom.className = "Lc_hid";
+				utDomTool.setProByNam("nextDom", "className", "Lc_hid");
+				utDomTool.setProByNam("preDom", "className", "Lc_hid");
 			}
 		}
 		dat.doMark(false);
@@ -217,5 +219,6 @@ function init() {
 	idDom.onkeyup = dat.keyUp;
 	urlDom.onkeyup = dat.keyUp;
 	ipDom.onkeyup = dat.keyUp;
+	lzr_tools.getDomains("io_home");
 	dat.chgTim();
 }

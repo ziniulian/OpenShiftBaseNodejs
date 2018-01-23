@@ -5,6 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0" />
 		<meta charset="utf-8" />
 		<script type="text/javascript" src="/myLib/LZR.js"></script>
+		<script type="text/javascript" src="/tools.js"></script>
 		<script type="text/javascript" src="js/index.js"></script>
 		<link rel="stylesheet" href="/base.css">
 
@@ -24,25 +25,25 @@
 	<body>
 		<div id="boso" class="boso">
 			<div class="logo">
-				<a class="logohome" target="_blank" href="/"></a>
+				<a name="dmad_io_home" class="logohome" target="_blank"></a>
 				<a href="javascript: dat.qry(-2);">--删除--</a>
 			</div>
 			<div>
 				<table>
 					<tbody>
 						<tr>
-							<td width="24%" class="c">
+							<td width="24%">
 								<input id="idDom" type="text" placeholder="ID查询" onfocus="this.select();"></input>
 							</td>
 							<td width="1%" />
-							<td width="49%">
+							<td width="46%">
 								<input id="urlDom" type="text" placeholder="URL查询" onfocus="this.select();"></input>
 							</td>
 							<td width="1%" />
 							<td width="17%">
 								<input id="ipDom" type="text" placeholder="IP查询" onfocus="this.select();"></input>
 							</td>
-							<td width="8%">
+							<td width="11%" class="c">
 								<a href="javascript: dat.clear();">重置</a>
 							</td>
 						</tr>
@@ -75,24 +76,31 @@
 					</tbody>
 				</table>
 			</div>
-			<hr />
+			<br />
+			<div class="c">
+				<a name="preDom" href="javascript: dat.prePage();">上一页</a>
+				&nbsp;&nbsp;&nbsp;
+				<a name="nextDom" href="javascript: dat.nextPage();">下一页</a>
+			</div>
+			<br />
 			<div>
 				<table>
 					<tbody>
 						<tr>
 							<th width="25%">时间</th>
-							<th width="50%">URL</th>
+							<th width="47%">URL</th>
 							<th width="17%">IP</th>
-							<th width="8%">ID</th>
+							<th width="11%">ID</th>
 						</tr>
 					</tbody>
 					<tbody id="tbs"></tbody>
 				</table>
 			</div>
+			<br />
 			<div class="c">
-				<a id="preDom" href="javascript: dat.prePage();">上一页</a>
+				<a name="preDom" href="javascript: dat.prePage();">上一页</a>
 				&nbsp;&nbsp;&nbsp;
-				<a id="nextDom" href="javascript: dat.nextPage();">下一页</a>
+				<a name="nextDom" href="javascript: dat.nextPage();">下一页</a>
 			</div>
 			<div id="mark" class="Lc_nosee"><br /><br />请稍候 ...<br /><br /><a href="javascript: dat.doMark(false);">取消</a></div>
 		</div>

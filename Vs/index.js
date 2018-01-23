@@ -146,7 +146,8 @@ r.get("/srvQry/:size/:stim/:etim/:uuid?/:ip?/:url?", function (req, res, next) {
 		q.ip = {"$in": p.split(",")};
 	}
 	if (u) {
-		q.url = {"$regex": new RegExp(u)};
+		// q.url = {"$regex": new RegExp(u)};	// 模糊查询
+		q.url = u;
 	}
 	if (n > 0) {
 		mdb.qry("qry", req, res, next, [q, n]);
