@@ -215,10 +215,10 @@ var dat = {
 };
 
 function init() {
+	lzr_tools.getDomains("io_home");
 	ajx.evt.rsp.add(dat.hdqry);
 	idDom.onkeyup = dat.keyUp;
 	urlDom.onkeyup = dat.keyUp;
 	ipDom.onkeyup = dat.keyUp;
-	lzr_tools.getDomains("io_home");
 	dat.chgTim();
 }

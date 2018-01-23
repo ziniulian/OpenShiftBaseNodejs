@@ -215,6 +215,7 @@ var dat = {
 };
 
 function init() {
+	lzr_tools.getDomains("io_home");
 	ajx.evt.rsp.add(dat.hdqry);
 	ajxD.evt.rsp.add(dat.hddo);
 
