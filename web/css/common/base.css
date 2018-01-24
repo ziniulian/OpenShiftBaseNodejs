@@ -90,6 +90,8 @@ hr {
 	height: 15rem;
 	margin: 0 auto;
 	border: 0.2rem solid #F00;
+	overflow-x: hidden;
+	overflow-y: auto;
 }
 
 .k {

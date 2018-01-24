@@ -203,13 +203,10 @@ var dat = {
 	},
 
 	clear: function () {
-		var b = urlDom.value || idDom.value || ipDom.value;
 		idDom.value = "";
 		ipDom.value = "";
 		urlDom.value = "";
-		if (b) {
-			dat.reflush();
-		}
+		dat.reflush();
 	}
 
 };
@@ -221,4 +218,6 @@ function init() {
 	urlDom.onkeyup = dat.keyUp;
 	ipDom.onkeyup = dat.keyUp;
 	dat.chgTim();
+
+	lzr_tools.trace();
 }

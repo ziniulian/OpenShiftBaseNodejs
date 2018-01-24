@@ -1,0 +1,59 @@
+<html>
+	<head>
+		<title>时间换算</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0" />
+		<meta charset="utf-8">
+		<script type="text/javascript" src="/myLib/LZR.js"></script>
+	</head>
+	<body>
+		<div id="boso">
+		</div>
+	</body>
+
+	<script type="text/javascript">
+		document.body.onload = function () {
+			LZR.load([
+				"LZR.Base.Time",
+				"LZR.Base.Json",
+				"LZR.HTML.Base.Ajax",
+				"LZR.HTML.Util.Url"
+			]);
+			var ajx = new LZR.HTML.Base.Ajax ();
+			var utJson = LZR.getSingleton(LZR.Base.Json);
+			var utUrl = LZR.getSingleton(LZR.HTML.Util.Url);
+			var utTim = LZR.getSingleton(LZR.Base.Time);
+
+			var s, c, ms;
+			var o = utUrl.getRequest();
+
+			if (o.now) {
+				// 当前时间
+				s = utJson.toObj(ajx.get("srvNow/")).dat;
+				ms = utJson.toObj(ajx.get("srvTime/")).dat;
+				c = new Date();
+				boso.innerHTML += "<br/><br/><h1>当前时间 ：</h1>远程时间戳 ： " + s + " , " + utTim.format(new Date(s), "datetim") +
+					"<br/><br/>远程时间值 ： " + utTim.getTim(ms) + " , " + ms +
+					"<br/><br/>本地 ： " + c.getTime() + " , " + utTim.format(c, "datetim");
+			}
+			if (o.t) {
+				// 时间转戳
+				s = utJson.toObj(ajx.get("srvTestTim/" + o.t)).dat;
+				c = utTim.getDayTimestamp(o.t);
+				ms = utTim.getTim(o.t);
+				boso.innerHTML += "<br/><br/><h1>时间转戳 ： " + o.t + "</h1>远程日戳 ： " + s +
+					"<br/><br/>本地日戳 ： " + c + "<br/><br/>本地毫秒戳 ： " + ms;
+			}
+			if (o.v) {
+				// 日戳转时间
+				s = utJson.toObj(ajx.get("srvTestTim/0/" + o.v)).dat;
+				c = utTim.parseDayTimestamp(o.v - 0);
+				boso.innerHTML += "<br/><br/><h1>日戳转时间 ： " + o.v + "</h1>远程 ： " + s + " , " + utTim.format(new Date(s), "datetim") +
+					"<br/><br/>本地 ： " + c + " , " + utTim.format(new Date(c), "datetim");
+			}
+			if (o.vm) {
+				// 毫秒戳转时间
+				boso.innerHTML += "<br/><br/><h1>毫秒戳转时间 ： " + o.vm + "</h1>本地 ： " + utTim.format(new Date(o.vm - 0), "datetim");
+			}
+		}
+	</script>
+</html>

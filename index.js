@@ -3,21 +3,8 @@ require("lzr");
 
 // LZR 子模块加载
 LZR.load([
-	"LZR.Node.Util",
-	"LZR.Node.Srv",
-	"LZR.Node.Db.NodeAjax",
-	"LZR.HTML"
+	"LZR.Node.Srv"
 ]);
-
-var utNode = LZR.getSingleton(LZR.Node.Util);
-
-// Ajax，不使用域名服务的精简方式
-var ajax = new LZR.Node.Db.NodeAjax ({
-	hd_sqls: {
-		// vs: "/Vs/srvTrace/<0>/0/<1>"	// 测试用
-		vs: LZR.HTML.domain + "Vs/srvTrace/<0>/0/<1>"
-	}
-});
 
 // 服务的实例化
 var srv = new LZR.Node.Srv ({
@@ -33,12 +20,6 @@ srv.ro.get("/favicon.ico", function (req, res) {
 	res.sendFile("Logo.png", {
 		root: "./"
 	});
-});
-
-// 访问记录
-srv.ro.get(/(^\/(flawerShop\/)?(index.html)?$)/i, function (req, res, next) {
-	ajax.qry("vs", req, res, next, [encodeURIComponent(req.protocol + "://" + req.hostname + req.originalUrl), utNode.getClientIp(req)]);
-	next();
 });
 
 // 公共样式
