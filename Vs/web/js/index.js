@@ -32,8 +32,8 @@ var dat = {
 	},
 
 	qryTim: function () {
-		var s = utTim.getTim(stimDom.value);
-		var e = utTim.getTim(etimDom.value) + 86399999;
+		var s = utTim.getTim(stimDom.value + " 0:0");
+		var e = utTim.getTim(etimDom.value + " 0:0") + 86399999;
 		if (dat.pg === 0) {
 			dat.pgd = [s];
 		} else {
