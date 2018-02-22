@@ -3,7 +3,7 @@ LZR.load([
 	"LZR.Base.Json",
 	"LZR.HTML.Base.Ajax",
 	"LZR.HTML.Util.DomTool",
-    "LZR.HTML.Util.Finger"
+	"LZR.HTML.Util.Finger"
 ]);
 
 var lzr_tools = {
