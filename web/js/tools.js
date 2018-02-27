@@ -44,8 +44,8 @@ var lzr_tools = {
     trace: function () {
         var aj = new LZR.HTML.Base.Ajax ();
         var uuid = LZR.getSingleton(LZR.HTML.Util.Finger).uuid;
-        aj.post (("http://127.0.0.1/Vs/srvTrace/"), {	// 测试用
-        // aj.post ((LZR.HTML.domain + "Vs/srvTrace/"), {
+        // aj.post (("http://127.0.0.1/Vs/srvTrace/"), {	// 测试用
+        aj.post ((LZR.HTML.domain + "Vs/srvTrace/"), {
 			url: window.location.href,
 			uuid: uuid
 		}, null, true);

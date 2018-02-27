@@ -14,8 +14,8 @@ var utNode = LZR.getSingleton(LZR.Node.Util);
 // Ajax，不使用域名服务的精简方式
 var ajax = new LZR.Node.Db.NodeAjax ({
 	hd_sqls: {
-		vs: "127.0.0.1/Vs/srvTrace/"	// 测试用
-		// vs: LZR.HTML.domain + "Vs/srvTrace/"
+		// vs: "127.0.0.1/Vs/srvTrace/"	// 测试用
+		vs: LZR.HTML.domain + "Vs/srvTrace/"
 	}
 });
 
