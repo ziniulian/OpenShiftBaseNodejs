@@ -14,8 +14,8 @@ var utNode = LZR.getSingleton(LZR.Node.Util);
 // Ajax，不使用域名服务的精简方式
 var ajax = new LZR.Node.Db.NodeAjax ({
 	hd_sqls: {
-		// vs: "/Vs/srvTrace/<0>/0/<1>"	// 测试用
-		vs: LZR.HTML.domain + "Vs/srvTrace/<0>/0/<1>"
+		vs: "127.0.0.1/Vs/srvTrace/"	// 测试用
+		// vs: LZR.HTML.domain + "Vs/srvTrace/"
 	}
 });
 
@@ -50,7 +50,10 @@ srv.ro.get("/tools.js", function (req, res) {
 
 // 访问记录
 srv.ro.get(/(^\/(flawerShop\/)?(index.html)?$)/i, function (req, res, next) {
-	ajax.qry("vs", req, res, next, [encodeURIComponent(req.protocol + "://" + req.hostname + req.originalUrl), utNode.getClientIp(req)]);
+	ajax.qry("vs", req, res, next, null, {
+		url: req.protocol + "://" + req.hostname + req.originalUrl,
+		ip: utNode.getClientIp(req)
+	});
 	next();
 });
 

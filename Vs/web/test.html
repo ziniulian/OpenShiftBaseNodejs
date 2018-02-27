@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>测试</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0" />
+		<meta charset="utf-8" />
+		<!-- <script type="text/javascript" src="/myLib/LZR.js"></script> -->
+		<!-- <script type="text/javascript" src="/tools.js"></script> -->
+	</head>
+
+	<body>
+		<center>
+			<h1>srvTrace</h1>
+			<form action="srvTrace" method="post" target="_blank">
+				<table>
+					<tbody>
+						<tr><td>url</td><td><input name="url" type="text" placeholder="url"></input></td></tr>
+						<tr><td>ip</td><td><input name="ip" type="text" placeholder="ip"></input></td></tr>
+						<tr><td>uuid</td><td><input name="uuid" type="text" placeholder="uuid"></input></td></tr>
+					</tbody>
+				</table>
+				<br /><input type="submit" value="提交" />
+			</form>
+
+			<h1>srvQry</h1>
+			<form action="srvQry" method="post" target="_blank">
+				<table>
+					<tbody>
+						<tr><td>size</td><td><input name="size" type="text" placeholder="size" value="10"></input></td></tr>
+						<tr><td>sort</td><td><input name="sort" type="text" placeholder="sort" value="-1"></input></td></tr>
+						<tr><td>tim</td><td><input name="tim" type="text" placeholder="tim"></input></td></tr>
+						<tr><td>stim</td><td><input name="stim" type="text" placeholder="stim"></input></td></tr>
+						<tr><td>etim</td><td><input name="etim" type="text" placeholder="etim"></input></td></tr>
+						<tr><td>url</td><td><input name="url" type="text" placeholder="url"></input></td></tr>
+						<tr><td>ip</td><td><input name="ip" type="text" placeholder="ip"></input></td></tr>
+						<tr><td>uuid</td><td><input name="uuid" type="text" placeholder="uuid"></input></td></tr>
+					</tbody>
+				</table>
+				<br /><input type="submit" value="提交" />
+			</form>
+		</center>
+	</body>
+
+	<!-- <script type="text/javascript">
+		document.body.onload = function () {
+			LZR.load([
+				"LZR.HTML.Base.Ajax"
+			]);
+			var ajx = new LZR.HTML.Base.Ajax ();
+			ajx.post("/Vs/srvTrace", {a:1, b:2});
+
+			lzr_tools.trace();
+		};
+	</script> -->
+</html>

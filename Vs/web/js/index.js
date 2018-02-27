@@ -1,110 +1,57 @@
 // 访问管理
 
 LZR.load([
-	"LZR.Base.Json",
-	"LZR.HTML.Base.Ajax",
-	"LZR.HTML.Util.DomTool",
+	"LZR.HTML.Srv.ComDbQry",
 	"LZR.Base.Time"
 ]);
 
-var ajx = new LZR.HTML.Base.Ajax ();
-var utJson = LZR.getSingleton(LZR.Base.Json);
 var utTim = LZR.getSingleton(LZR.Base.Time);
-var utDomTool = LZR.getSingleton(LZR.HTML.Util.DomTool);
 var dat = {
-	busy: false,
-	pgs: 10,			// 分页个数
-	pgd: null,		// 分页位置
-	pg: 0,			// 当前页数
-
 	timtmp: new Date(),	// 时间缓存
 
-	doMark: function (b) {
-		if (b) {
-			mark.className = "mark";
-		} else {
-			if (dat.busy) {
-				ajx.abort();
-			}
-			mark.className = "Lc_nosee";
+	// 数据库访问工具
+	db: new LZR.HTML.Srv.ComDbQry ({
+		pgs: 10,
+		sort: -1,
+		keyNam: "tim",
+		proNam: "tim",
+		mark: {
+			showCss: "mark",
+			hidCss: "Lc_nosee"
+		},
+		btn: {
+			preNam: "preDom",
+			nextNam: "nextDom",
+			showCss: "",
+			hidCss: "Lc_hid"
+		},
+		url: {
+			qry: "srvQry/"
 		}
-		dat.busy = b;
-	},
+	}),
 
-	qryTim: function () {
-		var s = utTim.getTim(stimDom.value + " 0:0");
-		var e = utTim.getTim(etimDom.value + " 0:0") + 86399999;
-		if (dat.pg === 0) {
-			dat.pgd = [s];
-		} else {
-			e = dat.pgd[dat.pg];
-		}
-		return s + "/" + e + "/";
-	},
-
-	qry: function (op) {
-		if (!dat.busy) {
-			dat.doMark(true);
-			var url;
-			if (op) {
-				dat.pg = 0;
-				url = "srvQry/" + op + "/" + dat.qryTim();
-			} else {
-				url = "srvQry/" + (dat.pgs + 1) + "/" + dat.qryTim();
-			}
+	// 数据库初始化
+	initDb: function () {
+		dat.db.mark.doe = document.getElementById("mark");
+		dat.db.evt.qryb.add(function (o) {
+			tbs.innerHTML = "";
+			o.stim = utTim.getTim(stimDom.value + " 0:0");
+			o.etim = utTim.getTim(etimDom.value + " 0:0") + 86399999;
 			if (idDom.value) {
-				url += idDom.value;
-				url += "/";
-			} else {
-				url += "null/";
+				o.uuid = idDom.value;
 			}
 			if (ipDom.value) {
-				url += ipDom.value;
-				url += "/";
-			} else {
-				url += "null/";
+				o.ip = ipDom.value;
 			}
 			if (urlDom.value) {
-				url += encodeURIComponent(urlDom.value);
+				o.url = urlDom.value;
 			}
-			tbs.innerHTML = "";
-			ajx.get(url, true);
-		}
-	},
-
-	hdqry: function (txt, sta) {
-		var i, d, o, n;
-		if (sta === 200) {
-			d = utJson.toObj(txt);
-			if (d.ok) {
-				o = d.dat;
-				if (o.length > dat.pgs) {
-					n = dat.pgs;
-					dat.pgd[dat.pg + 1] = o[dat.pgs].tim;
-					utDomTool.setProByNam("nextDom", "className", "");
-				} else {
-					n = o.length;
-					utDomTool.setProByNam("nextDom", "className", "Lc_hid");
-				}
-				if (dat.pg) {
-					dat.pgd[dat.pg] = o[0].tim;
-					utDomTool.setProByNam("preDom", "className", "");
-				} else {
-					utDomTool.setProByNam("preDom", "className", "Lc_hid");
-				}
-				for (i = 0; i < n; i ++) {
-					dat.show(o[i]);
-				}
-			} else if (dat.pg) {
-				dat.busy = false;
-				dat.prePage();
-				return;
-			} else {
-				utDomTool.setProByNam("nextDom", "className", "Lc_hid");
-				utDomTool.setProByNam("preDom", "className", "Lc_hid");
+		});
+		dat.db.evt.qryr.add(function (o) {
+			for (var i = 0; i < o.length; i ++) {
+				dat.show(o[i]);
 			}
-		}
-		dat.doMark(false);
+		});
 	},
 
 	show: function (o) {
@@ -135,26 +82,9 @@ var dat = {
 		tbs.appendChild(r);
 	},
 
-	prePage: function () {
-		if (dat.pg) {
-			dat.pg --;
-		}
-		dat.qry();
-	},
-
-	nextPage: function () {
-		dat.pg ++;
-		dat.qry();
-	},
-
-	reflush: function () {
-		dat.pg = 0;
-		dat.qry();
-	},
-
 	keyUp: function (e) {
 		if (e.keyCode === 13) {		// 回车键
-			dat.reflush();
+			dat.db.first();
 		}
 	},
 
@@ -199,25 +129,29 @@ var dat = {
 				etimDom.value = t;
 				break;
 		}
-		dat.reflush();
+		dat.db.first();
 	},
 
 	clear: function () {
-		idDom.value = "";
-		ipDom.value = "";
-		urlDom.value = "";
-		dat.reflush();
+		var b = !idDom.value && !ipDom.value && !urlDom.value;
+		if (b) {
+			dat.db.qry();
+		} else {
+			idDom.value = "";
+			ipDom.value = "";
+			urlDom.value = "";
+			dat.db.first();
+		}
 	}
 
 };
 
 function init() {
 	lzr_tools.getDomains("io_home");
-	ajx.evt.rsp.add(dat.hdqry);
+	dat.initDb();
 	idDom.onkeyup = dat.keyUp;
 	urlDom.onkeyup = dat.keyUp;
 	ipDom.onkeyup = dat.keyUp;
 	dat.chgTim();
-
 	lzr_tools.trace();
 }
