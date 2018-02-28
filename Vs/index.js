@@ -49,7 +49,7 @@ r.post("/srvTrace/", function (req, res, next) {
 			"uuid": req.body.uuid || "0"
 		};
 		if (req.body.dbLog) {
-			o."dbLog" = utJson.toObj (req.body.dbLog);
+			o.dbLog = utJson.toObj (req.body.dbLog);
 		}
 		cmdb.add(req, res, next, false, o);
 	} else {
