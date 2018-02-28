@@ -15,10 +15,11 @@ var lzr_tools = {
 
 	getDomains: function (ids, cb) {
 		if (ids) {
-			var url = LZR.HTML.domain + "Domain/srvGet/" + ids;
 			var ajx = new LZR.HTML.Base.Ajax ();
 			ajx.evt.rsp.add(LZR.bind(ajx, lzr_tools.hdDomains, cb));
-			ajx.get(url, true);
+			ajx.post(LZR.HTML.domain + "Domain/srvGet/", {
+				ids: ids
+			}, null, true);
 		} else if (cb) {
 			cb(lzr_tools.domains);
 		}

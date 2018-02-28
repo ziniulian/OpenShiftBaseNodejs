@@ -9,6 +9,7 @@ var curPath = require.resolve("./index.js").replace("index.js", "");
 // LZR 子模块加载
 LZR.load([
 	"LZR.Base.Math",
+	"LZR.Base.Json",
 	"LZR.Node.Util",
 	"LZR.Node.Srv.Result",
 	"LZR.Node.Srv.ComDbSrv"
@@ -16,6 +17,7 @@ LZR.load([
 var clsR = LZR.Node.Srv.Result;
 var utMath = LZR.getSingleton(LZR.Base.Math);
 var utNode = LZR.getSingleton(LZR.Node.Util);
+var utJson = LZR.getSingleton(LZR.Base.Json);
 
 // 常用数据库
 var cmdb = new LZR.Node.Srv.ComDbSrv ({
@@ -40,12 +42,16 @@ r.post("/srvTrace/", function (req, res, next) {
 	res.set({"Access-Control-Allow-Origin": "*"});	// 跨域
 	var u = req.body.url;
 	if (u) {
-		cmdb.add(req, res, next, false, {
+		var o = {
 			"tim": Date.now(),
 			"url": req.body.url,
 			"ip": req.body.ip || utNode.getClientIp(req),
 			"uuid": req.body.uuid || "0"
-		});
+		};
+		if (req.body.dbLog) {
+			o."dbLog" = utJson.toObj (req.body.dbLog);
+		}
+		cmdb.add(req, res, next, false, o);
 	} else {
 		res.json(clsR.get(0, "缺少 url", false));
 	}
@@ -83,8 +89,8 @@ r.post("/srvQry/", function (req, res, next) {
 	cmdb.qry( req, res, next, "tim", utMath.str2num(req.body.tim), q, {"_id": 0} );
 });
 
-// 启动日志
-r.get("/initAjx/", function (req, res, next) {
+// 开启日志
+r.get("/openLog/", function (req, res, next) {
 	if (cmdb.logAble === 0) {
 		cmdb.logAble = 1;
 		cmdb.initAjx();

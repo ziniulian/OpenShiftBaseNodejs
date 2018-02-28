@@ -14,7 +14,6 @@ var dat = {
 		pgs: 10,
 		sort: -1,
 		keyNam: "tim",
-		proNam: "tim",
 		mark: {
 			showCss: "mark",
 			hidCss: "Lc_nosee"
