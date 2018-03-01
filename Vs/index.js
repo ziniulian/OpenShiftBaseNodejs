@@ -9,7 +9,6 @@ var curPath = require.resolve("./index.js").replace("index.js", "");
 // LZR 子模块加载
 LZR.load([
 	"LZR.Base.Math",
-	"LZR.Base.Json",
 	"LZR.Node.Util",
 	"LZR.Node.Srv.Result",
 	"LZR.Node.Srv.ComDbSrv"
@@ -17,7 +16,6 @@ LZR.load([
 var clsR = LZR.Node.Srv.Result;
 var utMath = LZR.getSingleton(LZR.Base.Math);
 var utNode = LZR.getSingleton(LZR.Node.Util);
-var utJson = LZR.getSingleton(LZR.Base.Json);
 
 // 常用数据库
 var cmdb = new LZR.Node.Srv.ComDbSrv ({
@@ -49,7 +47,8 @@ r.post("/srvTrace/", function (req, res, next) {
 			"uuid": req.body.uuid || "0"
 		};
 		if (req.body.dbLog) {
-			o.dbLog = utJson.toObj (req.body.dbLog);
+			// o.dbLog = utJson.toObj (req.body.dbLog);		// BUG: 对象被解析后 若有 $开头的关键字，将会添加失败！
+			o.dbLog = req.body.dbLog;
 		}
 		cmdb.add(req, res, next, false, o);
 	} else {
