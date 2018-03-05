@@ -36,7 +36,7 @@
 
 			<div class="block backimg" style="
 				height: 25rem;
-				background-image: url(https://wx2.sinaimg.cn/mw690/b15ebbfely1fop0kw2bt3j21kw16oe83.jpg);
+				background-image: url(https://wx2.sinaimg.cn/mw690/b15ebbfely1fop08ypts0j21kw16ohdv.jpg);
 			"></div>
 
 			<div class="block">
@@ -64,11 +64,6 @@
 
 			<div class="block backimg" style="
 				height: 20rem;
-				background-image: url(https://wx2.sinaimg.cn/mw690/b15ebbfely1fop08ypts0j21kw16ohdv.jpg);
-			"></div>
-
-			<div class="block backimg" style="
-				height: 20rem;
 				background-image: url(https://wx2.sinaimg.cn/mw690/b15ebbfely1fop08wso08j21kw16ohdv.jpg);
 			"></div>
 
@@ -93,7 +88,7 @@
 			"></div>
 
 			<div class="head"><br />地理位置</div>
-			<div class="block" style="height: 37rem;" id="dituContent"></div>
+			<div class="block" style="height: 30rem;" id="dituContent"></div>
 
 		</div>
 	</body>
@@ -113,7 +108,7 @@
 		function createMap(){
 			var map = new BMap.Map("dituContent");//在百度地图容器中创建一个地图
 			var point = new BMap.Point(103.735518,36.057458);//定义一个中心点坐标
-			map.centerAndZoom(point,16);//设定地图的中心点和坐标并将地图显示在地图容器中
+			map.centerAndZoom(point,18);//设定地图的中心点和坐标并将地图显示在地图容器中
 			window.map = map;//将map变量存储在全局
 		}
 
@@ -128,7 +123,7 @@
 		//地图控件添加函数：
 		function addMapControl(){
 			//向地图中添加缩放控件
-		var ctrl_nav = new BMap.NavigationControl({anchor:BMAP_ANCHOR_TOP_LEFT,type:BMAP_NAVIGATION_CONTROL_ZOOM});
+		var ctrl_nav = new BMap.NavigationControl({anchor:BMAP_ANCHOR_TOP_LEFT,type:BMAP_NAVIGATION_CONTROL_LARGE});
 		map.addControl(ctrl_nav);
 					//向地图中添加比例尺控件
 		var ctrl_sca = new BMap.ScaleControl({anchor:BMAP_ANCHOR_BOTTOM_LEFT});
@@ -137,7 +132,7 @@
 
 		//标注点数组
 		var markerArr = [{title:"金城元宝君子兰花卉基地",content:"",point:"103.737342|36.056721",isOpen:0,icon:{w:21,h:21,l:0,t:46,x:1,lb:10}}
-			 ,{title:"废品回收站",content:"沿此回收站旁蓝铁门的土路进入",point:"103.73462|36.059048",isOpen:1,icon:{w:23,h:25,l:23,t:21,x:9,lb:12}}
+			 ,{title:"废品回收店",content:"沿此回收店旁蓝铁门的土路进入",point:"103.73462|36.059048",isOpen:1,icon:{w:23,h:25,l:23,t:21,x:9,lb:12}}
 			 ];
 		//创建marker
 		function addMarker(){
@@ -192,7 +187,7 @@
 			var icon = new BMap.Icon("http://app.baidu.com/map/images/us_mk_icon.png", new BMap.Size(json.w,json.h),{imageOffset: new BMap.Size(-json.l,-json.t),infoWindowOffset:new BMap.Size(json.lb+5,1),offset:new BMap.Size(json.x,json.h)})
 			return icon;
 		}
-	//标注线数组
+		//标注线数组
 		var plPoints = [{style:"solid",weight:6,color:"#f00",opacity:0.6,points:["103.73471|36.059216","103.738061|36.058114","103.73736|36.05675"]}
 			 ];
 		//向地图中添加线函数
