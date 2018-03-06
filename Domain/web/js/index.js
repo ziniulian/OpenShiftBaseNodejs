@@ -83,7 +83,7 @@ var dat = {
 
 	set: function (id, url) {
 		idDom.value = id;
-		urlDom.value = dat.ds[id].url;
+		urlDom.value = url;
 		urlDom.focus();
 	},
 
