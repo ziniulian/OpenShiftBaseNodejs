@@ -54,7 +54,7 @@ srv.ro.get("/myNam/", function (req, res) {
 });
 
 // 访问记录
-srv.ro.get(/(^\/(flawerShop\/)?(index.html)?$)/i, function (req, res, next) {
+srv.ro.get(/(^\/(index.html)?$)/i, function (req, res, next) {
 	ajax.qry("vs", req, res, next, null, {
 		url: req.protocol + "://" + req.hostname + req.originalUrl,
 		ip: utNode.getClientIp(req)
