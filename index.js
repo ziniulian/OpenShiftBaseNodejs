@@ -48,18 +48,18 @@ srv.ro.get("/tools.js", function (req, res) {
 	res.redirect("/js/tools.js");
 });
 
-// 返回服务名
-srv.ro.get("/myNam/", function (req, res) {
-	res.send("LZR");
-});
-
 // 访问记录
-srv.ro.get(/(^\/(index.html)?$)/i, function (req, res, next) {
+srv.ro.get(/(^\/(myNam\/)?(index.html)?$)/i, function (req, res, next) {
 	ajax.qry("vs", req, res, next, null, {
 		url: req.protocol + "://" + req.hostname + req.originalUrl,
 		ip: utNode.getClientIp(req)
 	});
 	next();
+});
+
+// 返回服务名
+srv.ro.get("/myNam/", function (req, res) {
+	res.send("LZR");
 });
 
 // 静态主页设置
