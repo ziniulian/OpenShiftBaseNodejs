@@ -74,14 +74,6 @@ srv.use("/Domain/", require("./Domain"));
 // 时间服务
 srv.use("/Tim/", require("./Tim"));
 
-// 模板测试
-srv.ro.get("/td/test/:txt?", function (req, res, next) {
-	req.qpobj = { txt: req.params.txt || "_ _ _" };
-	next();
-});
-// 初始化模板
-srv.ro.initTmp("/td/");
-
 // 收尾处理
 srv.use("*", function (req, res) {
 	res.status(404).sendFile("err.html", {
